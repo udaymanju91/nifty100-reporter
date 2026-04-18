@@ -1,0 +1,18 @@
+{
+  "email_enabled": true,
+  "smtp_host": "smtp.gmail.com",
+  "smtp_port": 587,
+  "smtp_username": "lightsonlearning01@gmail.com",
+  "smtp_password": "__GMAIL_APP_PASSWORD__",
+  "mail_from": "lightsonlearning01@gmail.com",
+  "mail_to": ["udaymanju91@gmail.com"],
+  "history_backfill_days": 2000,
+  "delivery_backfill_days": 60,
+  "recent_news_days": 10,
+  "recent_news_max_items": 5,
+  "sentiment_pos_cutoff": 0.05,
+  "sentiment_neg_cutoff": -0.05,
+  "signal_log_max_mb": 30,
+  "signal_log_archive_days": 90,
+  "corporate_action_lookahead_days": 30
+  }
