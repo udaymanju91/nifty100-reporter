@@ -414,8 +414,8 @@ from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 
 APP_NAME = "Nifty 100 Daily EMA Cross Reporter"
-APP_VERSION = "3.3.9"
-APP_RELEASE_DATE = "2026-04-19"
+APP_VERSION = "3.3.8"
+APP_RELEASE_DATE = "2026-04-17"
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW_IST  = datetime.now(IST)
 
@@ -4841,13 +4841,9 @@ def log_new_signals(
     rotate_signal_log(cfg)
     # ── Fix 16A: skip signal insertion on weekends/holidays — no new signals fire ──
     if RESOLVED_TRADE_DATE.weekday() >= 5:
-        logger.info(
-            "Signal log: weekend run detected (%s). RESOLVED_TRADE_DATE points to "
-            "last trading day — proceeding with signal insertion.",
-            RESOLVED_TRADE_DATE,
-        )
-    # Weekend guard (return) removed — sig_id dedup + update_signal_tracker()
-    # is_trading_day guard are sufficient. No duplicate risk.
+        logger.info("Signal log: skipping new signal insertion — %s is a weekend.",
+                    RESOLVED_TRADE_DATE)
+        return
     existing     = _load_signal_log()
     today_str    = RESOLVED_TRADE_DATE.strftime("%Y-%m-%d")
     existing_ids = set(existing["signal_id"].astype(str)) if not existing.empty else set()
@@ -5445,10 +5441,9 @@ def _render_report_section(
     global _section_counter
     _section_counter += 1
     tbl_id = f"tbl{_section_counter}"
-    sec_id = f"section-{_section_counter}"
 
     section = (
-        f"<div id='{sec_id}' class='section-block'>"
+        f"<div class='section-block'>"
         f"<div class='section-head'>"
         f"<h2>{heading}</h2>"
         f"<span class='section-badge'>— signals</span>"
@@ -5566,11 +5561,6 @@ def _render_report_section(
         + "</tr></thead><tbody>"
         + "".join(tr)
         + "</tbody></table>\n"
-        + f"<div style='text-align:right;padding:4px 8px 8px 0;font-size:0.72rem;'>"
-          f"<a href='#{sec_id}' style='color:var(--accent);text-decoration:none;"
-          f"opacity:0.70;' onmouseover=\"this.style.opacity='1'\""
-          f" onmouseout=\"this.style.opacity='0.70'\">"
-          f"&#8593;&nbsp;Back to top of this section</a></div>\n"
         + "</div></div>\n"
     )
     return section
