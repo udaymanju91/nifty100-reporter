@@ -5448,6 +5448,7 @@ def _render_report_section(
         f"<h2>{heading}</h2>"
         f"<span class='section-badge'>— signals</span>"
         f"<button class='section-toggle'>&#9650; Collapse</button>"
+        "<a href='#top' class='section-top-link' title='Back to top'>&#8593;&nbsp;Top</a>"
         f"</div>"
         f"<div class='section-body'>\n"
     )
@@ -5672,6 +5673,7 @@ def _render_ribbon_tiered(report_df: pd.DataFrame) -> str:
             "Bullish Report &#8211; Cumulative (Tiered)</h2>"
             "<span class='section-badge'>0 signals</span>"
             "<button class='section-toggle'>&#9650; Collapse</button>"
+            "<a href='#top' class='section-top-link' title='Back to top'>&#8593;&nbsp;Top</a>"
             "</div>"
             "<div class='section-body'>"
             "<div class='empty'><p>No stock currently has EMA 10 &gt; EMA 20 &gt; "
@@ -5689,6 +5691,7 @@ def _render_ribbon_tiered(report_df: pd.DataFrame) -> str:
         "Bullish Report &#8211; Cumulative (Tiered)</h2>"
         f"<span class='section-badge'>{total} signal{'s' if total != 1 else ''}</span>"
         "<button class='section-toggle'>&#9650; Collapse</button>"
+        "<a href='#top' class='section-top-link' title='Back to top'>&#8593;&nbsp;Top</a>"
         "</div>"
         "<div class='section-body'>"
     )
@@ -5974,6 +5977,14 @@ small{{color:var(--text-dim);font-size:.84rem}}
   box-shadow:var(--shadow-md);opacity:.75;transition:all .2s;
 }}
 #back-top:hover{{opacity:1;background:var(--bg-hover);color:var(--text)}}
+
+.section-top-link{{
+  margin-left:auto;font-size:.75rem;color:var(--text-dim);
+  text-decoration:none;padding:2px 8px;
+  border:1px solid var(--border);border-radius:4px;
+  opacity:.7;transition:opacity .2s;
+}}
+.section-top-link:hover{{opacity:1;color:var(--accent)}}
 
 /* ── Disclaimer ── */
 .disclaimer{{
