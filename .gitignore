@@ -1,0 +1,12 @@
+# Python cache files
+*.pyc
+*.pyo
+__pycache__/
+
+# Sensitive auth files
+token.json
+credentials.json
+
+# Local environment
+.env
+.DS_Store

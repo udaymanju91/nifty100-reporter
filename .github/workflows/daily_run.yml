@@ -2,12 +2,11 @@ name: Nifty 100 Daily Reporter
 
 on:
   schedule:
-    # 18:00 IST = 12:30 UTC (IST is UTC+5:30)
-    - cron: '30 12 * * 1-5'   # Mon–Fri at 12:30 UTC = 18:00 IST
-  workflow_dispatch:            # allows manual trigger (for test runs)
+    - cron: '30 12 * * 1-5'
+  workflow_dispatch:
 
 permissions:
-  contents: write               # needed to commit reports back to repo
+  contents: write
 
 jobs:
   run-reporter:
@@ -16,29 +15,24 @@ jobs:
 
     steps:
 
-      # ── 1. Check out the repository ──────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # ── 2. Set up Python ─────────────────────────────────────────────────────
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
-      # ── 3. Install dependencies ───────────────────────────────────────────────
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # ── 4. Inject secrets into config.json ───────────────────────────────────
       - name: Inject Gmail password into config
         run: |
           sed -i 's/__GMAIL_APP_PASSWORD__/${{ secrets.GMAIL_APP_PASSWORD }}/g' config.json
 
-      # ── 5. Run the reporter script ────────────────────────────────────────────
       - name: Run Nifty 100 Reporter
         id: run_script
         run: |
@@ -46,7 +40,6 @@ jobs:
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
         continue-on-error: true
 
-      # ── 6. Set run status for email subject line ──────────────────────────────
       - name: Set run status
         id: status
         run: |
@@ -58,18 +51,16 @@ jobs:
             echo "emoji=❌" >> $GITHUB_OUTPUT
           fi
 
-      # ── 7. Find output files ──────────────────────────────────────────────────
       - name: Find output files
-         id: find_files
-          run: |
-            HTML=$(ls -t reports/nifty100_daily_report_*.html 2>/dev/null | head -1 || echo "")
-            XLSX=$(ls -t reports/nifty100_daily_report_*.xlsx 2>/dev/null | head -1 || echo "")
-            LOG=$(ls -t logs/run*.log 2>/dev/null | head -1 || echo "logs/run_output.log")
-            echo "html_file=$HTML" >> $GITHUB_OUTPUT
-            echo "xlsx_file=$XLSX" >> $GITHUB_OUTPUT
-            echo "log_file=$LOG"   >> $GITHUB_OUTPUT
+        id: find_files
+        run: |
+          HTML=$(ls -t reports/nifty100_daily_report_*.html 2>/dev/null | head -1 || echo "")
+          XLSX=$(ls -t reports/nifty100_daily_report_*.xlsx 2>/dev/null | head -1 || echo "")
+          LOG=$(ls -t logs/run*.log 2>/dev/null | head -1 || echo "logs/run_output.log")
+          echo "html_file=$HTML" >> $GITHUB_OUTPUT
+          echo "xlsx_file=$XLSX" >> $GITHUB_OUTPUT
+          echo "log_file=$LOG" >> $GITHUB_OUTPUT
 
-      # ── 8. Send success email with attachments ────────────────────────────────
       - name: Send success email
         if: steps.status.outputs.result == 'SUCCESS'
         uses: dawidd6/action-send-mail@v3
@@ -77,33 +68,29 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 587
           secure: false
-          username: udaymanju91@gmail.com
+          username: lightsonlearning01@gmail.com
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: "✅ Nifty 100 Report — ${{ github.run_id }} — SUCCESS"
+          subject: "Nifty 100 Report - SUCCESS"
           to: udaymanju91@gmail.com
-          from: "Nifty Reporter <udaymanju91@gmail.com>"
+          from: "Nifty Reporter <lightsonlearning01@gmail.com>"
           body: |
-            ✅ NIFTY 100 DAILY REPORTER — SUCCESSFUL RUN
+            NIFTY 100 DAILY REPORTER - SUCCESSFUL RUN
 
-            Run Date  : ${{ github.run_id }}
+            Run ID    : ${{ github.run_id }}
             Triggered : ${{ github.event_name }}
-            Status    : SUCCESS ✅
+            Status    : SUCCESS
 
             Files attached:
-            • HTML Report  : ${{ steps.find_files.outputs.html_file }}
-            • Excel Report : ${{ steps.find_files.outputs.xlsx_file }}
-            • Execution Log: ${{ steps.find_files.outputs.log_file }}
+            - HTML Report
+            - Excel Report
+            - Execution Log
 
-            All output files have also been committed to the GitHub repository
-            under the /reports and /logs folders for 90-day audit retention.
+            All output files have been committed to the GitHub repository
+            under /reports and /logs folders for 90-day audit retention.
 
-            — Nifty 100 Reporter (GitHub Actions)
-          attachments: >-
-            ${{ steps.find_files.outputs.html_file }},
-            ${{ steps.find_files.outputs.xlsx_file }},
-            ${{ steps.find_files.outputs.log_file }}
+            - Nifty 100 Reporter (GitHub Actions)
+          attachments: "${{ steps.find_files.outputs.html_file }},${{ steps.find_files.outputs.xlsx_file }},${{ steps.find_files.outputs.log_file }}"
 
-      # ── 9. Send failure email ─────────────────────────────────────────────────
       - name: Send failure email
         if: steps.status.outputs.result == 'FAILURE'
         uses: dawidd6/action-send-mail@v3
@@ -111,52 +98,49 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 587
           secure: false
-          username: udaymanju91@gmail.com
+          username: lightsonlearning01@gmail.com
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: "❌ Nifty 100 Report — ${{ github.run_id }} — FAILED"
+          subject: "Nifty 100 Report - FAILED"
           to: udaymanju91@gmail.com
-          from: "Nifty Reporter <udaymanju91@gmail.com>"
+          from: "Nifty Reporter <lightsonlearning01@gmail.com>"
           body: |
-            ❌ NIFTY 100 DAILY REPORTER — FAILED RUN
+            NIFTY 100 DAILY REPORTER - FAILED RUN
 
-            Run Date  : ${{ github.run_id }}
+            Run ID    : ${{ github.run_id }}
             Triggered : ${{ github.event_name }}
-            Status    : FAILURE ❌
+            Status    : FAILURE
 
             The script encountered an error. The execution log is attached.
             Please review the log to identify the root cause.
 
             Common causes:
-            • NSE / niftyindices.com API timeout (re-run usually fixes this)
-            • yfinance rate limit (wait 30 min and re-run)
-            • Missing data file on first run (run once manually to bootstrap)
+            - NSE / niftyindices.com API timeout (re-run usually fixes this)
+            - yfinance rate limit (wait 30 min and re-run)
+            - Missing data file on first run (run once manually to bootstrap)
 
-            To manually re-trigger: Go to your GitHub repo →
-            Actions → Nifty 100 Daily Reporter → Run workflow
+            To manually re-trigger:
+            Go to your GitHub repo -> Actions -> Nifty 100 Daily Reporter -> Run workflow
 
-            — Nifty 100 Reporter (GitHub Actions)
-          attachments: ${{ steps.find_files.outputs.log_file }}
+            - Nifty 100 Reporter (GitHub Actions)
+          attachments: "${{ steps.find_files.outputs.log_file }}"
 
-      # ── 10. Commit output files back to repo (90-day audit trail) ────────────
       - name: Commit reports and logs to repository
         if: always()
         run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add reports/ logs/ data/ || true
-          git diff --staged --quiet || git commit -m \
-            "📊 Auto-report: $(date '+%Y-%m-%d') [${{ steps.status.outputs.result }}]"
+          git diff --staged --quiet || git commit -m "Auto-report: $(date '+%Y-%m-%d') [${{ steps.status.outputs.result }}]"
           git push || true
 
-      # ── 11. Clean up reports/logs older than 90 days ─────────────────────────
       - name: Remove files older than 90 days
         if: always()
         run: |
           find reports/ -name "*.html" -mtime +90 -delete 2>/dev/null || true
           find reports/ -name "*.xlsx" -mtime +90 -delete 2>/dev/null || true
-          find logs/    -name "*.log"  -mtime +90 -delete 2>/dev/null || true
-          git config user.name  "github-actions[bot]"
+          find logs/ -name "*.log" -mtime +90 -delete 2>/dev/null || true
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A reports/ logs/ || true
-          git diff --staged --quiet || git commit -m "🧹 Cleanup: removed files older than 90 days"
+          git diff --staged --quiet || git commit -m "Cleanup: removed files older than 90 days"
           git push || true
