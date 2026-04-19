@@ -2,7 +2,7 @@ name: Nifty 100 Daily Reporter
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '30 12 * * 1-7'
   workflow_dispatch:
 
 permissions:
