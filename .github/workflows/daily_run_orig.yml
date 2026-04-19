@@ -1,0 +1,150 @@
+name: Nifty 100 Daily Reporter
+
+on:
+  schedule:
+    - cron: '30 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-reporter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Inject Gmail password into config
+        run: |
+          sed -i 's/__GMAIL_APP_PASSWORD__/${{ secrets.GMAIL_APP_PASSWORD }}/g' config.json
+
+      - name: Set today date
+        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Run Nifty 100 Reporter
+        id: run_script
+        run: |
+          python nifty100_Report_Final_19042026.py 2>&1 | tee logs/run_github_output.log
+          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Set run status
+        id: status
+        run: |
+          if [ "${{ steps.run_script.outputs.exit_code }}" = "0" ]; then
+            echo "result=SUCCESS" >> $GITHUB_OUTPUT
+            echo "emoji=✅" >> $GITHUB_OUTPUT
+          else
+            echo "result=FAILURE" >> $GITHUB_OUTPUT
+            echo "emoji=❌" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Find output files
+        id: find_files
+        run: |
+          HTML=$(ls -t reports/nifty100_daily_report_*.html 2>/dev/null | head -1 || echo "")
+          XLSX=$(ls -t reports/nifty100_daily_report_*.xlsx 2>/dev/null | head -1 || echo "")
+          LOG=$(ls -t logs/run*.log 2>/dev/null | head -1 || echo "logs/run_github_output.log")
+          echo "html_file=$HTML" >> $GITHUB_OUTPUT
+          echo "xlsx_file=$XLSX" >> $GITHUB_OUTPUT
+          echo "log_file=$LOG" >> $GITHUB_OUTPUT
+
+
+      - name: Send success email
+        if: steps.status.outputs.result == 'SUCCESS'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: lightsonlearning01@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "[GitHub Actions] - Nifty 100 EMA Report - ${{ env.TODAY }} - SUCCESS"
+          to: udaymanju91@gmail.com
+          from: "Nifty Reporter <lightsonlearning01@gmail.com>"
+          body: |
+            NIFTY 100 DAILY EMA Crossover REPORTER - SUCCESSFUL RUN
+
+            Run ID    : ${{ github.run_id }}
+            Triggered : ${{ github.event_name }}
+            Status    : SUCCESS
+
+            Files attached:
+            - HTML Report
+            - Excel Report
+            - Execution Log
+
+            All output files have been committed to the GitHub repository
+            under /reports and /logs folders for 90-day audit retention.
+
+            - Nifty 100 Reporter (GitHub Actions)
+          attachments: "${{ steps.find_files.outputs.html_file }},${{ steps.find_files.outputs.xlsx_file }},${{ steps.find_files.outputs.log_file }}"
+
+      - name: Send failure email
+        if: steps.status.outputs.result == 'FAILURE'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: lightsonlearning01@gmail.com
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "[GitHub Actions] - Nifty 100 EMA Report - ${{ env.TODAY }} - FAILED"
+          to: udaymanju91@gmail.com
+          from: "Nifty Reporter <lightsonlearning01@gmail.com>"
+          body: |
+            NIFTY 100 DAILY EMA Crossover REPORTER - FAILED RUN
+
+            Run ID    : ${{ github.run_id }}
+            Triggered : ${{ github.event_name }}
+            Status    : FAILURE
+
+            The script encountered an error. The execution log is attached.
+            Please review the log to identify the root cause.
+
+            Common causes:
+            - NSE / niftyindices.com API timeout (re-run usually fixes this)
+            - yfinance rate limit (wait 30 min and re-run)
+            - Missing data file on first run (run once manually to bootstrap)
+
+            To manually re-trigger:
+            Go to your GitHub repo -> Actions -> Nifty 100 Daily Reporter -> Run workflow
+
+            - Nifty 100 Reporter (GitHub Actions)
+          attachments: "${{ steps.find_files.outputs.log_file }}"
+
+      - name: Commit reports and logs to repository
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/ logs/ data/ || true
+          git diff --staged --quiet || git commit -m "Auto-report: $(date '+%Y-%m-%d') [${{ steps.status.outputs.result }}]"
+          git push || true
+
+      - name: Remove files older than 90 days
+        if: always()
+        run: |
+          find reports/ -name "*.html" -mtime +90 -delete 2>/dev/null || true
+          find reports/ -name "*.xlsx" -mtime +90 -delete 2>/dev/null || true
+          find logs/ -name "*.log" -mtime +90 -delete 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A reports/ logs/ || true
+          git diff --staged --quiet || git commit -m "Cleanup: removed files older than 90 days"
+          git push || true

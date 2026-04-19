@@ -43,38 +43,41 @@ jobs:
         run: |
           echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "CURRENT_RUN_ID=${{ github.run_id }}" >> $GITHUB_ENV
-          echo "MARKER_DIR=logs/automation_markers" >> $GITHUB_ENV
-          echo "MARKER_FILE=logs/automation_markers/$(date +'%Y-%m-%d').success" >> $GITHUB_ENV
 
           if [ "${{ github.event_name }}" = "schedule" ]; then
             echo "TRIGGER_SOURCE=github-schedule" >> $GITHUB_ENV
-            echo "IS_AUTOMATED=true" >> $GITHUB_ENV
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.trigger_source }}" = "cron-job-org" ]; then
             echo "TRIGGER_SOURCE=cron-job-org" >> $GITHUB_ENV
-            echo "IS_AUTOMATED=true" >> $GITHUB_ENV
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "TRIGGER_SOURCE=manual" >> $GITHUB_ENV
-            echo "IS_AUTOMATED=false" >> $GITHUB_ENV
+            echo "TRIGGER_SOURCE=manual execution" >> $GITHUB_ENV
           else
             echo "TRIGGER_SOURCE=${{ github.event_name }}" >> $GITHUB_ENV
-            echo "IS_AUTOMATED=false" >> $GITHUB_ENV
           fi
 
-      - name: Check daily automation marker
+      - name: Check if workflow already succeeded today
         id: already_ran
-        run: |
-          mkdir -p "${MARKER_DIR}"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const workflow_id = context.workflow;
+            const currentRunId = context.runId;
+            const today = new Date().toISOString().slice(0, 10);
 
-          if [ "${IS_AUTOMATED}" != "true" ]; then
-            echo "skip=false" >> $GITHUB_OUTPUT
-            echo "skip_reason=Current run is manual; manual runs are always allowed." >> $GITHUB_OUTPUT
-          elif [ -f "${MARKER_FILE}" ]; then
-            echo "skip=true" >> $GITHUB_OUTPUT
-            echo "skip_reason=Successful automated run marker already exists for today (${MARKER_FILE})." >> $GITHUB_OUTPUT
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
-            echo "skip_reason=No automated success marker found for today." >> $GITHUB_OUTPUT
-          fi
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner,
+              repo,
+              workflow_id,
+              per_page: 50
+            });
+
+            const alreadyRan = runs.data.workflow_runs.some(run => {
+              const runDate = new Date(run.created_at).toISOString().slice(0, 10);
+              return run.id !== currentRunId && run.conclusion === 'success' && runDate === today;
+            });
+
+            core.setOutput('skip', alreadyRan ? 'true' : 'false');
 
       - name: Initialize log file header
         run: |
@@ -86,22 +89,19 @@ jobs:
             echo "Workflow        : ${{ github.workflow }}"
             echo "GitHub Event    : ${{ github.event_name }}"
             echo "Trigger Source  : ${TRIGGER_SOURCE}"
-            echo "Automated Run   : ${IS_AUTOMATED}"
-            echo "Marker File     : ${MARKER_FILE}"
             echo "Branch / Ref    : ${{ github.ref_name }}"
             echo "Run Date (UTC)  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
             echo "============================================================"
           } > logs/run_github_output.log
 
-      - name: Skip duplicate same-day automated execution
+      - name: Skip duplicate same-day execution
         if: steps.already_ran.outputs.skip == 'true'
         run: |
           {
             echo "SKIP DECISION    : YES"
-            echo "Reason           : ${{ steps.already_ran.outputs.skip_reason }}"
+            echo "Reason           : A successful run for this workflow already exists today."
             echo "Requested by     : ${TRIGGER_SOURCE}"
             echo "Action Taken     : Main Python execution skipped."
-            echo "Rule Applied     : Only automated runs block later automated runs on the same day."
             echo "============================================================"
           } | tee -a logs/run_github_output.log
 
@@ -111,27 +111,13 @@ jobs:
         run: |
           {
             echo "SKIP DECISION    : NO"
-            echo "Reason           : ${{ steps.already_ran.outputs.skip_reason }}"
+            echo "Reason           : No successful run found yet for today."
             echo "Execution Source : ${TRIGGER_SOURCE}"
-            echo "Rule Applied     : Manual runs are always allowed; only automated runs deduplicate each other."
             echo "============================================================"
           } | tee -a logs/run_github_output.log
           python nifty100_Report_Final_19042026.py 2>&1 | tee -a logs/run_github_output.log
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
         continue-on-error: true
-
-      - name: Create daily automation marker after successful automated run
-        if: steps.already_ran.outputs.skip != 'true' && steps.run_script.outputs.exit_code == '0' && env.IS_AUTOMATED == 'true'
-        run: |
-          mkdir -p "${MARKER_DIR}"
-          {
-            echo "date=${TODAY}"
-            echo "run_id=${{ github.run_id }}"
-            echo "event_name=${{ github.event_name }}"
-            echo "trigger_source=${TRIGGER_SOURCE}"
-            echo "created_utc=$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-          } > "${MARKER_FILE}"
-          echo "Created automation marker: ${MARKER_FILE}" | tee -a logs/run_github_output.log
 
       - name: Set run status for skipped run
         if: steps.already_ran.outputs.skip == 'true'
@@ -195,7 +181,6 @@ jobs:
             Run ID : ${{ github.run_id }}
             Triggered Event : ${{ github.event_name }}
             Trigger Source : ${{ env.TRIGGER_SOURCE }}
-            Automated Run : ${{ env.IS_AUTOMATED }}
             Status : SUCCESS
 
             Files attached:
@@ -227,7 +212,6 @@ jobs:
             Run ID : ${{ github.run_id }}
             Triggered Event : ${{ github.event_name }}
             Trigger Source : ${{ env.TRIGGER_SOURCE }}
-            Automated Run : ${{ env.IS_AUTOMATED }}
             Status : FAILURE
 
             The script encountered an error. The execution log is attached.
@@ -262,11 +246,10 @@ jobs:
             Run ID : ${{ github.run_id }}
             Triggered Event : ${{ github.event_name }}
             Trigger Source : ${{ env.TRIGGER_SOURCE }}
-            Automated Run : ${{ env.IS_AUTOMATED }}
             Status : SKIPPED
 
-            A successful automated run for this workflow already existed today,
-            so this later automated execution was safely skipped.
+            A successful run for this workflow already existed today,
+            so this duplicate execution was safely skipped.
 
             See attached log for full details.
 
@@ -288,7 +271,6 @@ jobs:
           find reports/ -name "*.html" -mtime +90 -delete 2>/dev/null || true
           find reports/ -name "*.xlsx" -mtime +90 -delete 2>/dev/null || true
           find logs/ -name "*.log" -mtime +90 -delete 2>/dev/null || true
-          find logs/automation_markers/ -name "*.success" -mtime +90 -delete 2>/dev/null || true
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A reports/ logs/ || true
