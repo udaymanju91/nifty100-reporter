@@ -33,10 +33,13 @@ jobs:
         run: |
           sed -i 's/__GMAIL_APP_PASSWORD__/${{ secrets.GMAIL_APP_PASSWORD }}/g' config.json
 
+      - name: Set today date
+        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Run Nifty 100 Reporter
         id: run_script
         run: |
-          python nifty100_Report_Final_19042026.py 2>&1 | tee logs/run_output.log
+          python nifty100_Report_Final_19042026.py 2>&1 | tee logs/run_github_output.log
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
         continue-on-error: true
 
@@ -56,13 +59,11 @@ jobs:
         run: |
           HTML=$(ls -t reports/nifty100_daily_report_*.html 2>/dev/null | head -1 || echo "")
           XLSX=$(ls -t reports/nifty100_daily_report_*.xlsx 2>/dev/null | head -1 || echo "")
-          LOG=$(ls -t logs/run*.log 2>/dev/null | head -1 || echo "logs/run_output.log")
+          LOG=$(ls -t logs/run*.log 2>/dev/null | head -1 || echo "logs/run_github_output.log")
           echo "html_file=$HTML" >> $GITHUB_OUTPUT
           echo "xlsx_file=$XLSX" >> $GITHUB_OUTPUT
           echo "log_file=$LOG" >> $GITHUB_OUTPUT
 
-      - name: Set today date
-        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
       - name: Send success email
         if: steps.status.outputs.result == 'SUCCESS'
