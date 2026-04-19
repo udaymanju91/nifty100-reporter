@@ -61,6 +61,9 @@ jobs:
           echo "xlsx_file=$XLSX" >> $GITHUB_OUTPUT
           echo "log_file=$LOG" >> $GITHUB_OUTPUT
 
+      - name: Set today date
+        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Send success email
         if: steps.status.outputs.result == 'SUCCESS'
         uses: dawidd6/action-send-mail@v3
@@ -70,11 +73,11 @@ jobs:
           secure: false
           username: lightsonlearning01@gmail.com
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: "Nifty 100 Report - SUCCESS"
+          subject: "[GitHub Actions] - Nifty 100 EMA Report - ${{ env.TODAY }} - SUCCESS"
           to: udaymanju91@gmail.com
           from: "Nifty Reporter <lightsonlearning01@gmail.com>"
           body: |
-            NIFTY 100 DAILY REPORTER - SUCCESSFUL RUN
+            NIFTY 100 DAILY EMA Crossover REPORTER - SUCCESSFUL RUN
 
             Run ID    : ${{ github.run_id }}
             Triggered : ${{ github.event_name }}
@@ -100,11 +103,11 @@ jobs:
           secure: false
           username: lightsonlearning01@gmail.com
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          subject: "Nifty 100 Report - FAILED"
+          subject: "[GitHub Actions] - Nifty 100 EMA Report - ${{ env.TODAY }} - FAILED"
           to: udaymanju91@gmail.com
           from: "Nifty Reporter <lightsonlearning01@gmail.com>"
           body: |
-            NIFTY 100 DAILY REPORTER - FAILED RUN
+            NIFTY 100 DAILY EMA Crossover REPORTER - FAILED RUN
 
             Run ID    : ${{ github.run_id }}
             Triggered : ${{ github.event_name }}
