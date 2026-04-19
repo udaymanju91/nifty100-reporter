@@ -6694,7 +6694,10 @@ def main():
     html_path = render_html(reports, history, market_health=market_health)
     xlsx_path = render_excel(reports, market_health=market_health)
     #send_email_with_reports(cfg, html_path, xlsx_path)
-    send_email_with_reports_via_gmail_api(cfg, html_path, xlsx_path)
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        logger.info("GitHub Actions detected — skipping Gmail API send (workflow handles email).")
+    else:
+        send_email_with_reports_via_gmail_api(cfg, html_path, xlsx_path)
     logger.info("Run completed successfully.")
     logger.info("Artifacts: %s | %s | log: %s", html_path, xlsx_path, LOG_FILE)
 
