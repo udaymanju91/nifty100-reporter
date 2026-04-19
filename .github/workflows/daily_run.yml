@@ -36,7 +36,7 @@ jobs:
       - name: Run Nifty 100 Reporter
         id: run_script
         run: |
-          python nifty100_v3_3_9_FINAL_r19.py 2>&1 | tee logs/run_output.log
+          python nifty100_Report_Final_19042026.py 2>&1 | tee logs/run_output.log
           echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
         continue-on-error: true
 
