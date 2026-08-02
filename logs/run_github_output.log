@@ -1,168 +1,17 @@
 ============================================================
 NIFTY 100 DAILY REPORTER
-Run ID          : 30748488575
+Run ID          : 30751461787
 Workflow        : Nifty 100 Daily Reporter
-GitHub Event    : workflow_dispatch
-Trigger Source  : cron-job-org
+GitHub Event    : schedule
+Trigger Source  : github-schedule
 Automated Run   : true
 Marker File     : logs/automation_markers/2026-08-02.success
 Branch / Ref    : main
-Run Date (UTC)  : 2026-08-02 12:45:43 UTC
+Run Date (UTC)  : 2026-08-02 14:09:28 UTC
 ============================================================
-SKIP DECISION    : NO
-Reason           : No automated success marker found for today.
-Execution Source : cron-job-org
-Rule Applied     : Manual runs are always allowed; only automated runs deduplicate each other.
+SKIP DECISION    : YES
+Reason           : Successful automated run marker already exists for today (logs/automation_markers/2026-08-02.success).
+Requested by     : github-schedule
+Action Taken     : Main Python execution skipped.
+Rule Applied     : Only automated runs block later automated runs on the same day.
 ============================================================
-2026-08-02 12:45:44,479 | INFO | Nifty 100 Daily EMA Cross Reporter | Version 3.3.8 | Released 2026-04-17
-2026-08-02 12:45:44,479 | INFO | Base directory: /home/runner/work/nifty100-reporter/nifty100-reporter
-2026-08-02 12:45:44,479 | INFO | Loaded config. Email enabled: True | Recipients: 1
-2026-08-02 12:45:44,633 | WARNING | NSE session bootstrap HTTP 403 (attempt 1/5) — refreshing NSE session cookie …
-2026-08-02 12:45:54,869 | INFO | NSE session bootstrap status: 200
-2026-08-02 12:45:54,870 | INFO | Downloading Nifty 100 universe from https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv
-2026-08-02 12:45:55,922 | INFO | Universe download status: 200
-2026-08-02 12:45:55,927 | INFO | Universe rows loaded: 100
-2026-08-02 12:45:56,037 | INFO | Loaded history rows: 132754
-2026-08-02 12:45:56,045 | INFO | yfinance history update: 100 symbols | 2026-07-30 → 2026-08-03
-2026-08-02 12:45:56,046 | INFO | yfinance batch download: 100 symbols | 2026-07-30 → 2026-08-03
-2026-08-02 12:46:00,572 | INFO | yfinance raw shape: (2, 500)
-2026-08-02 12:46:00,904 | INFO | yfinance parsed rows after date-filter: 198
-2026-08-02 12:46:00,904 | INFO | New rows from yfinance: 198
-2026-08-02 12:46:01,682 | INFO | Saved history rows: 132754 | file: /home/runner/work/nifty100-reporter/nifty100-reporter/data/nifty100_ohlcv_history.csv
-2026-08-02 12:46:01,798 | INFO | Loaded history rows: 132754
-2026-08-02 12:46:01,799 | INFO | Latest OHLCV data is from 2026-07-31
-2026-08-02 12:46:01,825 | INFO | Latest Delivery data is from 2026-07-31
-2026-08-02 12:46:01,871 | INFO | Delivery cache has 33 dates — skipping backfill.
-2026-08-02 12:46:01,871 | INFO | Delivery fetch attempt [2/7] — URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_31072026.csv
-2026-08-02 12:46:03,460 | INFO | Delivery fetch SUCCESS — date: 2026-07-31 | size: 371072 bytes | URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_31072026.csv
-2026-08-02 12:46:03,829 | INFO | Delivery cache updated: 2409 symbols for 2026-07-31 (rows in cache: 79107)
-2026-08-02 12:46:03,830 | INFO | Delivery data: 2409 symbols | fallback=False
-2026-08-02 12:46:04,241 | INFO | Corporate actions bulk OK: 85 raw rows | 5 Nifty100 symbols with events
-2026-08-02 12:46:33,816 | INFO | Corporate actions: 5/100 symbols have events (window 02-08-2026 to 01-09-2026) | Symbols: BOSCHLTD, GRASIM, HYUNDAI, ICICIBANK, MARUTI
-2026-08-02 12:46:33,816 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
-2026-08-02 12:46:33,817 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
-2026-08-02 12:46:33,817 | INFO | Index membership ready: 100 symbols mapped
-2026-08-02 12:46:34,483 | INFO | News RSS query for ABB: https://news.google.com/rss/search?q=%22ABB+India+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:35,019 | INFO | News RSS status for ABB: 200
-2026-08-02 12:46:35,391 | INFO | News RSS query for ADANIENSOL: https://news.google.com/rss/search?q=%22Adani+Energy+Solutions+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:35,580 | INFO | News RSS status for ADANIENSOL: 200
-2026-08-02 12:46:39,165 | INFO | News RSS query for APOLLOHOSP: https://news.google.com/rss/search?q=%22Apollo+Hospitals+Enterprise+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:39,370 | INFO | News RSS status for APOLLOHOSP: 200
-2026-08-02 12:46:39,373 | INFO | News RSS query for APOLLOHOSP: https://news.google.com/rss/search?q=%22Apollo+Hospitals+Enterprise+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:39,601 | INFO | News RSS status for APOLLOHOSP: 200
-2026-08-02 12:46:40,255 | INFO | News RSS query for ASIANPAINT: https://news.google.com/rss/search?q=%22Asian+Paints+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:40,451 | INFO | News RSS status for ASIANPAINT: 200
-2026-08-02 12:46:41,676 | INFO | News RSS query for BAJAJ-AUTO: https://news.google.com/rss/search?q=%22Bajaj+Auto+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:41,880 | INFO | News RSS status for BAJAJ-AUTO: 200
-2026-08-02 12:46:43,707 | INFO | News RSS query for BAJFINANCE: https://news.google.com/rss/search?q=%22Bajaj+Finance+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:43,919 | INFO | News RSS status for BAJFINANCE: 200
-2026-08-02 12:46:46,336 | INFO | News RSS query for BOSCHLTD: https://news.google.com/rss/search?q=%22Bosch+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:46,542 | INFO | News RSS status for BOSCHLTD: 200
-2026-08-02 12:46:46,607 | INFO | News RSS query for BOSCHLTD: https://news.google.com/rss/search?q=%22Bosch+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:46,611 | INFO | News RSS status for BOSCHLTD: 200
-2026-08-02 12:46:49,590 | INFO | News RSS query for CHOLAFIN: https://news.google.com/rss/search?q=%22Cholamandalam+Investment+and+Finance+Company+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:49,800 | INFO | News RSS status for CHOLAFIN: 200
-2026-08-02 12:46:50,437 | INFO | News RSS query for CIPLA: https://news.google.com/rss/search?q=%22Cipla+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:50,648 | INFO | News RSS status for CIPLA: 200
-2026-08-02 12:46:52,426 | INFO | News RSS query for DIVISLAB: https://news.google.com/rss/search?q=%22Divi%27s+Laboratories+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:52,612 | INFO | News RSS status for DIVISLAB: 200
-2026-08-02 12:46:52,614 | INFO | News RSS query for DIVISLAB: https://news.google.com/rss/search?q=%22Divi%27s+Laboratories+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:52,812 | INFO | News RSS status for DIVISLAB: 200
-2026-08-02 12:46:55,186 | INFO | News RSS query for EICHERMOT: https://news.google.com/rss/search?q=%22Eicher+Motors+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:55,381 | INFO | News RSS status for EICHERMOT: 200
-2026-08-02 12:46:56,059 | INFO | News RSS query for ETERNAL: https://news.google.com/rss/search?q=%22Eternal+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:56,270 | INFO | News RSS status for ETERNAL: 200
-2026-08-02 12:46:56,908 | INFO | News RSS query for GAIL: https://news.google.com/rss/search?q=%22GAIL+%28India%29+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:57,114 | INFO | News RSS status for GAIL: 200
-2026-08-02 12:46:58,332 | INFO | News RSS query for GRASIM: https://news.google.com/rss/search?q=%22Grasim+Industries+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:58,541 | INFO | News RSS status for GRASIM: 200
-2026-08-02 12:46:59,189 | INFO | News RSS query for HAL: https://news.google.com/rss/search?q=%22Hindustan+Aeronautics+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:46:59,393 | INFO | News RSS status for HAL: 200
-2026-08-02 12:47:04,309 | INFO | News RSS query for ICICIBANK: https://news.google.com/rss/search?q=%22ICICI+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:04,516 | INFO | News RSS status for ICICIBANK: 200
-2026-08-02 12:47:05,168 | INFO | News RSS query for INDHOTEL: https://news.google.com/rss/search?q=%22Indian+Hotels+Co.+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:05,353 | INFO | News RSS status for INDHOTEL: 200
-2026-08-02 12:47:05,355 | INFO | News RSS query for INDHOTEL: https://news.google.com/rss/search?q=%22Indian+Hotels+Co.+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:05,552 | INFO | News RSS status for INDHOTEL: 200
-2026-08-02 12:47:05,615 | INFO | News RSS query for INDHOTEL: https://news.google.com/rss/search?q=%22Indian+Hotels+Co.+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:05,619 | INFO | News RSS status for INDHOTEL: 200
-2026-08-02 12:47:05,621 | INFO | News RSS query for INDHOTEL: https://news.google.com/rss/search?q=%22Indian+Hotels+Co.+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:05,625 | INFO | News RSS status for INDHOTEL: 200
-2026-08-02 12:47:06,265 | INFO | News RSS query for INDIGO: https://news.google.com/rss/search?q=%22InterGlobe+Aviation+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:06,492 | INFO | News RSS status for INDIGO: 200
-2026-08-02 12:47:09,722 | INFO | News RSS query for JIOFIN: https://news.google.com/rss/search?q=%22Jio+Financial+Services+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:09,925 | INFO | News RSS status for JIOFIN: 200
-2026-08-02 12:47:10,564 | INFO | News RSS query for JSWSTEEL: https://news.google.com/rss/search?q=%22JSW+Steel+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:10,775 | INFO | News RSS status for JSWSTEEL: 200
-2026-08-02 12:47:10,840 | INFO | News RSS query for JSWSTEEL: https://news.google.com/rss/search?q=%22JSW+Steel+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:10,844 | INFO | News RSS status for JSWSTEEL: 200
-2026-08-02 12:47:10,907 | INFO | News RSS query for JSWSTEEL: https://news.google.com/rss/search?q=%22JSW+Steel+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:10,911 | INFO | News RSS status for JSWSTEEL: 200
-2026-08-02 12:47:12,073 | INFO | News RSS query for LODHA: https://news.google.com/rss/search?q=%22Lodha+Developers+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:12,265 | INFO | News RSS status for LODHA: 200
-2026-08-02 12:47:12,853 | WARNING | Skipping LTM — only 111 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
-2026-08-02 12:47:14,665 | INFO | News RSS query for MAXHEALTH: https://news.google.com/rss/search?q=%22Max+Healthcare+Institute+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:14,876 | INFO | News RSS status for MAXHEALTH: 200
-2026-08-02 12:47:16,095 | INFO | News RSS query for MOTHERSON: https://news.google.com/rss/search?q=%22Samvardhana+Motherson+International+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:16,281 | INFO | News RSS status for MOTHERSON: 200
-2026-08-02 12:47:16,284 | INFO | News RSS query for MOTHERSON: https://news.google.com/rss/search?q=%22Samvardhana+Motherson+International+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:16,492 | INFO | News RSS status for MOTHERSON: 200
-2026-08-02 12:47:17,705 | INFO | News RSS query for NESTLEIND: https://news.google.com/rss/search?q=%22Nestle+India+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:17,926 | INFO | News RSS status for NESTLEIND: 200
-2026-08-02 12:47:20,308 | INFO | News RSS query for PIDILITIND: https://news.google.com/rss/search?q=%22Pidilite+Industries+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:20,454 | INFO | News RSS status for PIDILITIND: 200
-2026-08-02 12:47:20,454 | INFO | News RSS query for PIDILITIND: https://news.google.com/rss/search?q=%22Pidilite+Industries+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:20,625 | INFO | News RSS status for PIDILITIND: 200
-2026-08-02 12:47:20,628 | INFO | News RSS query for PIDILITIND: https://news.google.com/rss/search?q=PIDILITIND+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:20,781 | INFO | News RSS status for PIDILITIND: 200
-2026-08-02 12:47:25,503 | INFO | News RSS query for SHRIRAMFIN: https://news.google.com/rss/search?q=%22Shriram+Finance+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:25,727 | INFO | News RSS status for SHRIRAMFIN: 200
-2026-08-02 12:47:26,355 | INFO | News RSS query for SIEMENS: https://news.google.com/rss/search?q=%22Siemens+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:26,496 | INFO | News RSS status for SIEMENS: 200
-2026-08-02 12:47:26,496 | INFO | News RSS query for SIEMENS: https://news.google.com/rss/search?q=%22Siemens+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:26,661 | INFO | News RSS status for SIEMENS: 200
-2026-08-02 12:47:27,291 | INFO | News RSS query for SOLARINDS: https://news.google.com/rss/search?q=%22Solar+Industries+India+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:27,509 | INFO | News RSS status for SOLARINDS: 200
-2026-08-02 12:47:28,151 | INFO | News RSS query for SUNPHARMA: https://news.google.com/rss/search?q=%22Sun+Pharmaceutical+Industries+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:28,355 | INFO | News RSS status for SUNPHARMA: 200
-2026-08-02 12:47:28,361 | WARNING | Skipping TATACAP — only 199 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
-2026-08-02 12:47:31,310 | INFO | News RSS query for TECHM: https://news.google.com/rss/search?q=%22Tech+Mahindra+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:31,485 | INFO | News RSS status for TECHM: 200
-2026-08-02 12:47:32,119 | INFO | News RSS query for TITAN: https://news.google.com/rss/search?q=%22Titan+Company+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:32,303 | INFO | News RSS status for TITAN: 200
-2026-08-02 12:47:32,308 | WARNING | Skipping TMCV — only 179 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
-2026-08-02 12:47:32,308 | WARNING | Skipping TMPV — only 196 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
-2026-08-02 12:47:32,940 | INFO | News RSS query for TORNTPHARM: https://news.google.com/rss/search?q=%22Torrent+Pharmaceuticals+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:33,153 | INFO | News RSS status for TORNTPHARM: 200
-2026-08-02 12:47:34,352 | INFO | News RSS query for TVSMOTOR: https://news.google.com/rss/search?q=%22TVS+Motor+Company+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:34,536 | INFO | News RSS status for TVSMOTOR: 200
-2026-08-02 12:47:35,742 | INFO | News RSS query for UNIONBANK: https://news.google.com/rss/search?q=%22Union+Bank+of+India%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:36,018 | INFO | News RSS status for UNIONBANK: 200
-2026-08-02 12:47:36,083 | INFO | News RSS query for UNIONBANK: https://news.google.com/rss/search?q=%22Union+Bank+of+India%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:36,088 | INFO | News RSS status for UNIONBANK: 200
-2026-08-02 12:47:36,377 | INFO | News RSS query for UNITDSPR: https://news.google.com/rss/search?q=%22United+Spirits+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
-2026-08-02 12:47:36,594 | INFO | News RSS status for UNITDSPR: 200
-2026-08-02 12:47:36,599 | WARNING | Skipping VAML — only 6 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
-2026-08-02 12:47:37,758 | WARNING | Skipping VEDPOWER — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
-2026-08-02 12:47:37,759 | WARNING | Skipping VISL — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
-2026-08-02 12:47:37,759 | WARNING | Skipping VOGL — only 7 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
-2026-08-02 12:47:38,910 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
-2026-08-02 12:47:38,910 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
-2026-08-02 12:47:38,910 | INFO | Index membership ready: 100 symbols mapped
-2026-08-02 12:47:38,911 | INFO | Market Health: fetching index OHLCV...
-2026-08-02 12:47:38,913 | INFO | Index OHLCV cache fresh for NIFTY 50 (1433 rows)
-2026-08-02 12:47:38,916 | INFO | Index OHLCV cache fresh for NIFTY NEXT 50 (1434 rows)
-2026-08-02 12:47:38,916 | INFO | Market Health: fetching VIX...
-2026-08-02 12:47:38,918 | INFO | VIX cache fresh (131 rows)
-2026-08-02 12:47:38,918 | INFO | Market Health: updating breadth EMA cache...
-2026-08-02 12:47:40,125 | INFO | Market Health [NIFTY 50]: Score=56.0 | Weak Bull &#x1F7E1;
-2026-08-02 12:47:40,142 | INFO | Market Health [Nifty Next 50]: Score=20.0 | Weak Bull &#x1F7E1;
-2026-08-02 12:47:40,182 | INFO | Signal log: skipping new signal insertion — 2026-08-02 is a weekend.
-2026-08-02 12:47:41,428 | INFO | Signal tracker: updated 191 Active signal rows.
-2026-08-02 12:47:41,447 | INFO | HTML report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20260802.html
-2026-08-02 12:47:41,456 | INFO | Market Health Excel sheet written.
-2026-08-02 12:47:42,662 | INFO | Excel report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20260802.xlsx
-2026-08-02 12:47:42,662 | INFO | GitHub Actions detected — skipping Gmail API send (workflow handles email).
-2026-08-02 12:47:42,662 | INFO | Run completed successfully.
-2026-08-02 12:47:42,662 | INFO | Artifacts: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20260802.html | /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20260802.xlsx | log: /home/runner/work/nifty100-reporter/nifty100-reporter/logs/run_20260802_181544.log
-Created automation marker: logs/automation_markers/2026-08-02.success
