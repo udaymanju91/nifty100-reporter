@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>Nifty 100 Daily Report &middot; 10 Oct 2026</title>
+<link rel='preconnect' href='https://fonts.googleapis.com'>
+<link href='https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap' rel='stylesheet'>
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── Design tokens ── */
+:root{
+  --bg:          #0b1623;
+  --bg-card:     #0f1f35;
+  --bg-table:    #0d1c30;
+  --bg-thead:    #112240;
+  --bg-even:     #0f1f35;
+  --bg-hover:    #1f4070;
+  --border:      #1e3a5f;
+  --border-soft: #172e50;
+  --text:        #e2ecff;
+  --text-dim:    #c8dcf4;
+  --text-muted:  #4a6a8a;
+  --accent:      #f5c842;
+  --accent2:     #5aabff;
+  --green:       #4ecb82;
+  --red:         #f06464;
+  --orange:      #f5a623;
+  --shadow-sm:   0 1px 4px rgba(0,0,0,.4);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.55);
+  --radius:      10px;
+}
+
+/* ── Base ── */
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;min-height:100vh;
+}
+
+/* ── Sticky top header ── */
+.site-header{
+  background:linear-gradient(135deg,#0a1e3d 0%,#0d2454 100%);
+  border-bottom:1px solid var(--border);
+  padding:14px 12px 10px;
+  position:sticky;top:0;z-index:200;
+  box-shadow:var(--shadow-md);
+}
+.site-header h1{
+  font-size:1.1rem;font-weight:700;
+  color:#fff;letter-spacing:.4px;margin-bottom:4px;
+}
+.meta-bar{font-size:.83rem;color:var(--text-dim);line-height:1.5}
+.meta-bar strong{color:var(--accent);font-weight:600}
+.hint-pill{
+  display:inline-block;margin-top:4px;
+  background:#112240;border:1px solid var(--border-soft);
+  border-radius:20px;padding:2px 10px;
+  font-size:.78rem;color:var(--text-muted);
+}
+
+/* ── Page wrapper ── */
+.page-wrap{width:100%;max-width:100%;margin:0;padding:20px 12px 80px;box-sizing:border-box}
+
+/* ── Section blocks ── */
+.section-block{margin-bottom:6px}
+.section-head{
+  display:flex;align-items:center;gap:10px;
+  margin:32px 0 8px;padding-bottom:8px;
+  border-bottom:2px solid var(--border);
+}
+.section-head h2{
+  font-size:.95rem;font-weight:600;
+  color:var(--accent);letter-spacing:.3px;
+}
+.section-badge{
+  background:#132444;color:var(--accent2);
+  font-size:.78rem;font-weight:700;
+  padding:2px 9px;border-radius:20px;
+  border:1px solid #1a3560;
+}
+.section-toggle{
+  margin-left:auto;background:none;
+  border:1px solid var(--border);color:var(--text-dim);
+  border-radius:6px;padding:3px 10px;font-size:.80rem;
+  cursor:pointer;transition:background .15s,color .15s;
+}
+.section-toggle:hover{background:var(--bg-hover);color:var(--text)}
+
+/* ── Empty state ── */
+.empty{
+  background:var(--bg-card);border:1px solid var(--border-soft);
+  border-radius:var(--radius);padding:14px 20px;margin-bottom:12px;
+  color:var(--text-dim);font-size:.94rem;
+}
+
+/* ── Table scroll wrapper ── */
+.tbl-wrap{
+  overflow:visible;border-radius:var(--radius);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-md);margin-bottom:8px;
+}
+.tbl-wrap::-webkit-scrollbar{height:5px}
+.tbl-wrap::-webkit-scrollbar-track{background:var(--bg-card)}
+.tbl-wrap::-webkit-scrollbar-thumb{background:#2a4a80;border-radius:3px}
+
+/* ── Table ── */
+table{
+  width:100%;border-collapse:collapse;
+  background:var(--bg-table);font-size:.90rem;
+}
+thead{position:sticky;top:55px;z-index:10}
+th{
+  background:var(--bg-thead);
+  color:#dce8f8;font-weight:700;font-size:.84rem;
+  letter-spacing:.4px;text-transform:uppercase;
+  white-space:nowrap;padding:9px 12px;
+  border-bottom:2px solid var(--border);
+  border-right:1px solid var(--border-soft);
+}
+td{
+  padding:8px 12px;vertical-align:top;
+  border-bottom:1px solid var(--border);
+  border-right:1px solid #1e3a5f;
+  color:var(--text);line-height:1.5;
+}
+tbody tr:nth-child(even) td{background:var(--bg-even)}
+tbody tr:hover td{
+  background:var(--bg-hover);
+  transition:background .08s;
+}
+
+/* ── Sort headers ── */
+th.th-sort{
+  cursor:pointer;user-select:none;
+  padding-right:22px;position:relative;
+}
+th.th-sort::after{
+  content:"⇅";position:absolute;right:6px;
+  top:50%;transform:translateY(-50%);
+  opacity:.25;font-size:.65rem;
+}
+th.th-sort:hover{background:#163060;color:#c8dcf4}
+th.th-sort.sorted-asc::after{content:" ▲";opacity:1;color:var(--accent)}
+th.th-sort.sorted-desc::after{content:" ▼";opacity:1;color:var(--accent)}
+
+/* ── Links ── */
+a{color:var(--accent2);text-decoration:none}
+a:hover{color:#8ccfff;text-decoration:underline}
+small{color:var(--text-dim);font-size:.84rem}
+
+/* ── Back to top ── */
+#back-top{
+  position:fixed;bottom:24px;right:24px;z-index:300;
+  background:#112240;border:1px solid var(--border);
+  color:var(--text-dim);border-radius:50%;
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;text-decoration:none;
+  box-shadow:var(--shadow-md);opacity:.75;transition:all .2s;
+}
+#back-top:hover{opacity:1;background:var(--bg-hover);color:var(--text)}
+
+/* ── Disclaimer ── */
+.disclaimer{
+  margin-top:40px;padding:12px 18px;
+  border-top:1px solid var(--border-soft);
+  color:var(--text-muted);font-size:.80rem;line-height:1.6;
+}
+
+/* ── News list ── */
+td ul{padding-left:16px;margin:0}
+td ul li{margin-bottom:3px;font-size:.86rem;color:var(--text-dim)}
+
+/* ── Conviction score highlight ── */
+td.conv-high{color:var(--green);font-weight:700}
+td.conv-mid {color:#e8c300;font-weight:600}
+td.conv-low {color:var(--red);font-weight:500}
+
+
+
+/* ── Report tables: auto layout — browser allocates by content width ── */
+.section-body table {
+  table-layout: auto;
+  width: 100%;
+  word-break: normal;
+}
+.section-body th {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+.section-body td {
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+/* Nudge: give Conviction Explanation a generous min-width */
+.section-body th:nth-child(19),
+.section-body td:nth-child(19) {
+  min-width: 220px;
+}
+/* Nudge: keep narrow cols from bloating */
+.section-body th:nth-child(2),
+.section-body td:nth-child(2) {
+  max-width: 60px;
+}
+.section-body th:nth-child(4),
+.section-body td:nth-child(4) {
+  white-space: nowrap;
+}
+.section-body th:nth-child(9),
+.section-body td:nth-child(9) {
+  min-width: 42px;
+  white-space: nowrap;
+}
+.section-body th:nth-child(11),
+.section-body td:nth-child(11) {
+  max-width: 60px;
+}
+
+/* ── No hover colour change on report tables ── */
+.section-body tbody tr:hover td {
+  background:inherit;
+  transition:none;
+}
+
+/* ── Report section font: -7% from current ── */
+.section-body table { font-size:0.84rem; }
+.section-body th    { font-size:0.78rem; }
+.section-body td    { font-size:0.82rem; }
+
+/* ── Report section: left align all content ── */
+.section-body td { text-align:left; }
+/* keep numeric/centre overrides for specific cells */
+.section-body td.td-center { text-align:center; }
+.section-body td.td-right  { text-align:right; }
+
+
+/* ── High Conviction Cards ── */
+.hc-section{
+  margin:28px 0 20px;
+}
+.hc-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:12px;
+}
+.hc-card{
+  background:#0d1e38;
+  border:1px solid #1e3a5f;
+  border-radius:10px;
+  padding:14px 16px;
+  min-width:200px;
+  max-width:240px;
+  flex:1 1 200px;
+  box-shadow:0 2px 10px rgba(0,0,0,.45);
+  cursor:pointer;
+  transition:border-color .15s, box-shadow .15s;
+  text-decoration:none;
+  display:block;
+  position:relative;
+}
+.hc-card:hover{
+  border-color:#4ecb82;
+  box-shadow:0 4px 18px rgba(78,203,130,.18);
+}
+.hc-card-symbol{
+  font-size:.95rem;
+  font-weight:700;
+  color:#dce8f8;
+  letter-spacing:.5px;
+  margin-bottom:6px;
+}
+.hc-card-score{
+  font-size:1.1rem;
+  font-weight:700;
+  color:#4ecb82;
+  margin-bottom:8px;
+}
+.hc-card-score.mid{color:#f5a623}
+.hc-card-score.low{color:#f06464}
+.hc-card-tag{
+  display:inline-block;
+  font-size:.72rem;
+  padding:2px 7px;
+  border-radius:12px;
+  margin:2px 2px 2px 0;
+  font-weight:600;
+}
+.tag-trend{background:#12304a;color:#5aabff}
+.tag-rsi{background:#1a2f1a;color:#4ecb82}
+.tag-vol{background:#2d1f0a;color:#f5a623}
+.tag-idx{background:#1e1240;color:#b388ff}
+.hc-card-arrow{
+  position:absolute;
+  bottom:10px;right:14px;
+  font-size:.75rem;
+  color:#c8dcf4;
+  opacity:.65;
+}
+.hc-card:hover .hc-card-arrow{opacity:1;color:#4ecb82}
+
+</style>
+
+<script>
+(function(){
+  function cellVal(td,num){
+    var t=td?td.textContent.trim():'';
+    if(num){var n=parseFloat(t.replace(/[^0-9.-]/g,''));return isNaN(n)?-Infinity:n;}
+    return t.toLowerCase();
+  }
+  function sortTable(th){
+    var tbl=th.closest('table'),col=parseInt(th.dataset.col,10),
+        num=th.dataset.numeric==='1',dir=th.dataset.dir;
+    dir=(dir==='desc')?'asc':'desc';
+    tbl.querySelectorAll('th.th-sort').forEach(function(h){h.classList.remove('sorted-asc','sorted-desc');h.dataset.dir='none';});
+    th.dataset.dir=dir;th.classList.add(dir==='asc'?'sorted-asc':'sorted-desc');
+    var tbody=tbl.querySelector('tbody'),rows=Array.from(tbody.querySelectorAll('tr'));
+    rows.sort(function(a,b){
+      var va=cellVal(a.querySelectorAll('td')[col],num),vb=cellVal(b.querySelectorAll('td')[col],num);
+      return va<vb?(dir==='asc'?-1:1):va>vb?(dir==='asc'?1:-1):0;
+    });
+    rows.forEach(function(r){tbody.appendChild(r);});
+  }
+  function toggleSection(btn){
+    var body=btn.closest('.section-block').querySelector('.section-body');
+    var hide=body.style.display==='none';
+    body.style.display=hide?'':'none';
+    btn.textContent=hide?'▲ Collapse':'▼ Expand';
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    // Sortable headers
+    document.querySelectorAll('th.th-sort').forEach(function(th){
+      th.addEventListener('click',function(){sortTable(th);});
+    });
+    document.querySelectorAll('th.th-sort[data-dir="desc"]').forEach(function(th){
+      th.classList.add('sorted-desc');
+    });
+    // Collapse toggles
+    document.querySelectorAll('.section-toggle').forEach(function(btn){
+      btn.addEventListener('click',function(){toggleSection(btn);});
+    });
+    // Wrap tables in .tbl-wrap
+    document.querySelectorAll('table').forEach(function(t){
+      if(!t.parentElement.classList.contains('tbl-wrap')){
+        var w=document.createElement('div');w.className='tbl-wrap';
+        t.parentNode.insertBefore(w,t);w.appendChild(t);
+      }
+    });
+    // Auto signal count badges
+    document.querySelectorAll('.section-block').forEach(function(sec){
+      var badge=sec.querySelector('.section-badge');
+      if(!badge)return;
+      var n=sec.querySelectorAll('tbody tr').length;
+      badge.textContent=n+(n===1?' signal':' signals');
+    });
+    // Colour conviction score cells
+    document.querySelectorAll('tbody tr').forEach(function(row){
+      var tds=row.querySelectorAll('td');
+      if(tds.length<18)return;
+      var td=tds[17],v=parseFloat(td.textContent);
+      if(!isNaN(v)){
+        td.classList.add(v>=70?'conv-high':v>=40?'conv-mid':'conv-low');
+      }
+    });
+  });
+})();
+</script>
+</head>
+<body>
+<header class='site-header' id='top'>
+  <h1>&#9642;&nbsp; Nifty 100 &mdash; Daily EMA Report</h1>
+  <div class='meta-bar'>
+    <strong>Saturday, 10 Oct 2026 &nbsp;&middot;&nbsp; 06:15 PM IST</strong>
+    &nbsp;&middot;&nbsp; v3.3.8
+    &nbsp;&middot;&nbsp; 137,654 history rows
+    &nbsp;&middot;&nbsp; last: 2026-10-09
+    &nbsp;&middot;&nbsp; price: yfinance (adj.)
+    <br><span class='hint-pill'>&#x21C5; click column header to sort &nbsp;&middot;&nbsp; click section heading to collapse</span>
+  </div>
+</header>
+<div class='page-wrap'>
+<div style="margin:24px 0"><div style="font-size:.95rem;font-weight:700;color:#ffd966;margin-bottom:14px;padding:10px 16px;letter-spacing:.3px;background:#0d1e3a;border-left:4px solid #ffd966;border-radius:0 8px 8px 0">&#x1F4CA;&nbsp; Market Health Dashboard</div><div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start"><div style="background:#0c1b33;border:1px solid #1e3a6b;border-radius:12px;min-width:320px;flex:1;box-shadow:0 4px 16px rgba(0,0,0,.5);overflow:hidden"><div style="background:#b71c1c;padding:12px 16px;display:flex;align-items:center;gap:10px"><span style="background:#1565c0;color:#fff;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700">N50</span><span style="color:#fff;font-size:14px;font-weight:700">NIFTY 50</span><span style="margin-left:auto;color:#fff;font-size:24px;font-weight:800">-35</span></div><div style="background:#0f2040;padding:8px 16px;border-bottom:1px solid #1e3a6b"><div style="font-size:14px;font-weight:600;color:#dce8f8;margin-bottom:2px">Weak Bear &#x1F534;</div><div style="font-size:11px;color:#c8dcf4">Position Size: <b style="color:#ffd966">Defensive (25%)</b></div><div style="background:#1a2f50;border-radius:4px;height:7px;width:100%;margin:4px 0"><div style="background:#c62828;width:32%;height:7px;border-radius:4px"></div></div></div><div style="padding:4px 0;background:#0c1b33"><table style="width:100%;border-collapse:collapse"><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Trend</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#e05252'>-40</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F534;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>Price below all averages — deep downtrend, avoid fresh longs</td></tr><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Breadth</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#e05252'>-60</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F534;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>18.0% &gt;EMA20 &nbsp;|&nbsp; 14.0% &gt;EMA50</td></tr><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Momentum</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#e05252'>-55</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F534;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>RSI 36.5</td></tr><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Volatility</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#ffd966'>+50</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F7E1;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>VIX 14.38 — Calm / Normal</td></tr><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Rel Strength</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#f5a623'>+0</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F7E0;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>Neutral RS (parity)</td></tr></table></div><div style="border-top:1px solid #1a3058;padding:4px 0;background:#0a1628"><table style="width:100%;border-collapse:collapse"><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>EMA Stack</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>P&lt;20&lt;50 &#x1F534;</td></tr><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>Structure</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>Mixed — no consistent pattern in highs or lows (choppy, stand aside and wait for clarity)</td></tr><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>Breadth &gt;EMA20</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>18.0% (9/50) &#x1F534;</td></tr><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>Breadth &gt;EMA50</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>14.0% (7/50) &#x1F534;</td></tr><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>MACD</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>&#x274C; Bearish</td></tr></table></div></div><div style="background:#0c1b33;border:1px solid #1e3a6b;border-radius:12px;min-width:320px;flex:1;box-shadow:0 4px 16px rgba(0,0,0,.5);overflow:hidden"><div style="background:#b71c1c;padding:12px 16px;display:flex;align-items:center;gap:10px"><span style="background:#b84800;color:#fff;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700">NN50</span><span style="color:#fff;font-size:14px;font-weight:700">Nifty Next 50</span><span style="margin-left:auto;color:#fff;font-size:24px;font-weight:800">-27</span></div><div style="background:#0f2040;padding:8px 16px;border-bottom:1px solid #1e3a6b"><div style="font-size:14px;font-weight:600;color:#dce8f8;margin-bottom:2px">Weak Bear &#x1F534;</div><div style="font-size:11px;color:#c8dcf4">Position Size: <b style="color:#ffd966">Defensive (25%)</b></div><div style="background:#1a2f50;border-radius:4px;height:7px;width:100%;margin:4px 0"><div style="background:#c62828;width:36%;height:7px;border-radius:4px"></div></div></div><div style="padding:4px 0;background:#0c1b33"><table style="width:100%;border-collapse:collapse"><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Trend</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#e05252'>-40</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F534;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>Price below all averages — deep downtrend, avoid fresh longs</td></tr><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Breadth</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#e05252'>-60</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F534;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>10.0% &gt;EMA20 &nbsp;|&nbsp; 8.0% &gt;EMA50</td></tr><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Momentum</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#f5a623'>-15</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F7E0;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>RSI 28.3</td></tr><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Volatility</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#ffd966'>+50</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F7E1;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>VIX 14.38 — Calm / Normal</td></tr><tr style='border-bottom:1px solid #1a3058'><td style='padding:5px 10px;color:#c8dcf4;font-size:12px;width:130px'>Rel Strength</td><td style='padding:5px 8px;font-weight:700;font-size:13px;text-align:right;color:#f5a623'>+0</td><td style='padding:5px 6px;font-size:14px;text-align:center'>&#x1F7E0;</td><td style='padding:5px 10px;color:#dce8f8;font-size:12px'>Neutral RS (parity)</td></tr></table></div><div style="border-top:1px solid #1a3058;padding:4px 0;background:#0a1628"><table style="width:100%;border-collapse:collapse"><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>EMA Stack</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>P&lt;20&lt;50 &#x1F534;</td></tr><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>Structure</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>Mixed — no consistent pattern in highs or lows (choppy, stand aside and wait for clarity)</td></tr><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>Breadth &gt;EMA20</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>10.0% (5/50) &#x1F534;</td></tr><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>Breadth &gt;EMA50</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>8.0% (4/50) &#x1F534;</td></tr><tr style='border-bottom:1px solid #12284a'><td style='padding:4px 10px;color:#c8dcf4;font-size:12px;white-space:nowrap;width:130px'>MACD</td><td colspan='3' style='padding:4px 10px;font-size:11px;color:#dce8f8'>&#x2705; Bullish</td></tr></table></div></div></div></div>
+<div class='hc-section'><div class='section-head'><h2>&#x2B50;&nbsp; High Conviction Stocks&nbsp;<span style='font-size:.75rem;color:#c8dcf4;font-weight:400'>score &gt; 75 &mdash; 1 stock across all reports</span></h2><span class='section-badge'>1 stocks</span></div><div class='hc-grid'><a class="hc-card" href="#row-KOTAKBANK" onclick="var el=document.getElementById('row-KOTAKBANK');if(el){el.scrollIntoView({behavior:'smooth',block:'center'});}return false;"><div class="hc-card-symbol">[ KOTAKBANK ]</div><div class="hc-card-score mid">Score: 82.5</div><div style="margin-bottom:4px"><span class='hc-card-tag tag-idx'>NIFTY 50</span><span class='hc-card-tag tag-trend'>Bullish</span><span class='hc-card-tag tag-rsi'>RSI 68</span><span class='hc-card-tag tag-vol'>Vol &#8593;</span></div><span class="hc-card-arrow">&#8594; View in report</span></a></div></div>
+<div class='section-block' id='section-1'><div class='section-head'><h2>Nifty 100 Daily EMA 21/50 Bullish Cross Report</h2><span class='section-badge'>— signals</span><button class='section-toggle'>&#9650; Collapse</button></div><div class='section-body'>
+<div class='empty'><p>No stock met the rule: EMA 21 crossed above EMA 50 on the latest trading day.</p></div>
+<div style='text-align:right;padding:6px 4px 4px;margin-top:4px;'><a href='#section-1' style='font-size:.78rem;color:var(--text-muted);text-decoration:none;opacity:.7;'>&#8593;&nbsp;Back to top of this section</a></div>
+</div></div>
+
+<div class='section-block' id='section-2'><div class='section-head'><h2>Nifty 100 Daily EMA 9/21 Bullish Cross Report</h2><span class='section-badge'>— signals</span><button class='section-toggle'>&#9650; Collapse</button></div><div class='section-body'>
+<table id='tbl2'><thead><tr><th class='th-sort' data-col='0' data-numeric='0' data-dir='none'>Symbol <span class='sort-arrow'></span></th><th class='th-sort' data-col='1' data-numeric='0' data-dir='none'>Index <span class='sort-arrow'></span></th><th class='th-sort' data-col='2' data-numeric='0' data-dir='none'>Company <span class='sort-arrow'></span></th><th class='th-sort' data-col='3' data-numeric='0' data-dir='none'>Date <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='4' data-numeric='1' data-dir='none'>Last Close <span class='sort-arrow'></span></th><th class='th-sort' data-col='5' data-numeric='0' data-dir='none'>52W H/L <span class='sort-arrow'></span></th><th class='th-sort' data-col='6' data-numeric='0' data-dir='none'>Candle <span class='sort-arrow'></span></th><th class='th-sort' data-col='7' data-numeric='0' data-dir='none'>Vol>14D <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='8' data-numeric='1' data-dir='none'>RSI <span class='sort-arrow'></span></th><th class='th-sort' data-col='9' data-numeric='0' data-dir='none'>RSI Div <span class='sort-arrow'></span></th><th class='th-sort' data-col='10' data-numeric='0' data-dir='none'>MACD > Sig <span class='sort-arrow'></span></th><th class='th-sort' data-col='11' data-numeric='0' data-dir='none'>ST(10,3)/(10,1) <span class='sort-arrow'></span></th><th class='th-sort' data-col='12' data-numeric='0' data-dir='none'>Momentum <span class='sort-arrow'></span></th><th class='th-sort' data-col='13' data-numeric='0' data-dir='none'>DT Trend <span class='sort-arrow'></span></th><th class='th-sort' data-col='14' data-numeric='0' data-dir='none'>DT Phase <span class='sort-arrow'></span></th><th class='th-sort' data-col='15' data-numeric='0' data-dir='none'>Chart Pat. <span class='sort-arrow'></span></th><th class='th-sort' data-col='16' data-numeric='0' data-dir='none'>Sup/Res <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='17' data-numeric='1' data-dir='desc'>Conv Score &#9660;</th><th class='th-sort' data-col='18' data-numeric='0' data-dir='none'>Conv Explanation <span class='sort-arrow'></span></th><th class='th-sort' data-col='19' data-numeric='0' data-dir='none'>News <span class='sort-arrow'></span></th></tr></thead><tbody><tr id='row-TRENT'><td style='font-weight:700;white-space:nowrap;color:#dce8f8;font-weight:700'>TRENT</td><td style='text-align:center;padding:7px 8px'><span style="background:#1565c0;color:#fff;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:bold;white-space:nowrap;">N50</span></td><td style='white-space:normal;word-break:normal;overflow-wrap:break-word'>Trent Ltd.</td><td style='white-space:nowrap;color:#c8dcf4'>2026-10-09</td><td style='text-align:right;font-size:.94rem;white-space:nowrap'>2918.2</td><td style='font-size:.86rem;white-space:nowrap;color:inherit'>H: 4866.50<br>L: 2545.80</td><td style='font-size:.87rem'>Morning Star</td><td style='text-align:center'>No</td><td style='text-align:right;font-weight:600;white-space:nowrap;color:#4ecb82'>61.15</td><td style='font-size:.87rem'>No divergence</td><td style='text-align:center'>Yes</td><td style='white-space:pre-line;font-size:.87rem'>(10,3) - Yes
+(10,1) - Yes</td><td style='font-size:.87rem'>Bullish</td><td style='font-size:.87rem'>Primary: Sideways | Secondary: Sideways | Minor: Sideways</td><td style='font-size:.87rem'>Consolidation</td><td style='font-size:.87rem'>Bearish Flag (75%); Possible Inverse Cup and Handle (55%); ⚠ Conflicting Signals — wait for resolution</td><td style='white-space:pre-line;font-size:.87rem'>S1: 2664.96–2687.13; S2: 2534.72–2556.88
+
+R1: 3233.42–3286.58; R2: 3388.62–3438.98</td><td style='text-align:center;font-weight:700;color:#e8c300'>59.0</td><td style='font-size:.85rem;line-height:1.55;color:#dce8f8'><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">PRICE ACTION</span>&nbsp;(16/25) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">62%</span></b><br>&nbsp;&nbsp;&nbsp;• Key Level     : 6/8 → nearing resistance 2936.00<br>&nbsp;&nbsp;&nbsp;• Pattern       : 1/7 → very noisy/wide<br>&nbsp;&nbsp;&nbsp;• Candle        : 2/3 → moderate bull body<br>&nbsp;&nbsp;&nbsp;• Market Str    : 7/7 → HH+HL both TFs ✓<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">TREND</span>&nbsp;(11/20) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">55%</span></b><br>&nbsp;&nbsp;&nbsp;• EMA Alignment : 7/12 → 9>21 partial align<br>&nbsp;&nbsp;&nbsp;• Dow Theory    : 4/8 → Consolidation<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">VOLUME</span>&nbsp;(7/15) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">47%</span></b><br>&nbsp;&nbsp;&nbsp;• Break Volume  : 1/7 → weak vol 0.6x ❌<br>&nbsp;&nbsp;&nbsp;• Volume Trend  : 5/5 → expanding strongly ✓<br>&nbsp;&nbsp;&nbsp;• Pullback Vol  : 1/3 → avg pullback vol<br><b style="font-size:1.05em;letter-spacing:0.03em;">🔴&nbsp;<span style="color:#ff1744;">DELIVERY</span>&nbsp;(5/15) — <span style="color:#ff1744;font-weight:bold;font-size:1.0em;">33%</span></b><br>&nbsp;&nbsp;&nbsp;• Deliv %       : 1/6 → low (40.7%) ⚠<br>&nbsp;&nbsp;&nbsp;• Deliv Trend   : 3/5 → choppy/indecisive  [59.8% → 13.9% → 32.5% → 30.5% → 40.7%] (-net penalty)<br>&nbsp;&nbsp;&nbsp;• Deliv Strength: 48/100 → (Neutral)<br>&nbsp;&nbsp;&nbsp;• Price Confirm : 2/4 → mixed but acceptable  [Price→+Deliv↑ | score=3.0]<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">RSI MOMENTUM</span>&nbsp;(8/10) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">80%</span></b><br>&nbsp;&nbsp;&nbsp;• RSI Zone      : 5/5 → bullish (61.2)<br>&nbsp;&nbsp;&nbsp;• RSI Slope     : 1/3 → flat (+0.0)<br>&nbsp;&nbsp;&nbsp;• RSI Divergence: 2/2 → no div (clean)<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">MACD</span>&nbsp;(8/10) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">75%</span></b><br>&nbsp;&nbsp;&nbsp;• MACD Cross    : 3/4 → above signal<br>&nbsp;&nbsp;&nbsp;• MACD Hist     : 4/4 → positive & growing ✓<br>&nbsp;&nbsp;&nbsp;• MACD Zero Line: 1/2 → approaching zero<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">SUPERTREND</span>&nbsp;(5/5) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">100%</span></b><br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,3): 3/3 → green ✓<br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,1): 2/2 → green ✓<br><b>🟡 SUMMARY (<span style="color:#ffd600;font-weight:bold;">59.0/100</span>)</b><br>&nbsp;&nbsp;Moderate conviction with strong momentum, positive MACD, but delivery is weak. Wait for one more confirmation.<br><small>🟢 Strong / Bullish &nbsp;&nbsp;🟡 Neutral &nbsp;&nbsp;🔴 Weak / Bearish</small></td><td style='font-size:.84rem'><ul><li><div style="background:#1a2e1a;border:1px solid #2e7d32;border-radius:4px;padding:5px 8px;margin-bottom:6px;font-size:11px;color:#81c784;">✅ No corporate actions in the next 30 days</div></li><li><a href='https://news.google.com/rss/articles/CBMiekFVX3lxTFAxOTg4WEFQd0NTUkhueFhhUHdqTm8yZUFOdEtjZnlMQUtpMHhqRVhaS1Fybi1LSVNBS3VVSjlBOFRfSUV0U1UtOW5YbnNGd3FValVyalFhOXo5X1lPVDJKbmhuNFB4S1ozNTZjeWl6cTRYT1hjdTJQU3JR?oc=5' target='_blank' rel='noopener noreferrer'>SSRETAIL Share Price Today - SS RETAIL LIMITED Stock Price Live NSE/BSE - Univest</a> (negative) – 10-Oct-2026 09:49</li><li><a href='https://news.google.com/rss/articles/CBMigwFBVV95cUxQWHZjN0wtTzd1dVR3TzN5TUhOV2d0aTJPb3VHWUxtYlZCTWpxS0hQcEFBWExuZkpjNmNFVEZiVi1STUozdHVoWWUxaXZhSS05SVRaR2lTR2xkakNWd25wWmw5eC0wQnVzQkFKTkhIZXJYSEdsT2oyWDJYc3FKVU5wREEtMA?oc=5' target='_blank' rel='noopener noreferrer'>SS Retail Ltd Share Price Today,, SSRETAIL Share Price NSE, BSE - Business Today</a> (positive) – 10-Oct-2026 04:44</li><li><a href='https://news.google.com/rss/articles/CBMirwFBVV95cUxQcDNabWNqRDVWaEtRZjhBQ2E2T1lVV184MTdCNkZTNl91ZmxfaTFaSkdjNTE3REVhb1RVSU55WERpVUxqZFhENHZMSzdCRjVyLUdQWGtMazdGWGlmNDJyYlhmbWIwZ3c4WEUyRDBFWTFFQkpUb3c5TGZaaXJvZmxqc0pNX1JURnFaTGl3VlVkWmtCZ0djWHd1NTNBVzVYTVFtV2Y0eFZkMmZVMnJzbWhZ?oc=5' target='_blank' rel='noopener noreferrer'>India stocks higher at close of trade; Nifty 50 up 0.98% - Investing.com</a> (positive) – 06-Oct-2026 16:04</li><li><a href='https://news.google.com/rss/articles/CBMiwgFBVV95cUxPTEs0b1MtTUxiMWhGeUZBTmRjTlFtT0tBdXBTSXZGbHpaMW4wMEFVMVZMM0U5TENaWEdMVmRFMTlTMDBuQW1zblI3YVJxYWVHcDdjWThYTk53dDdHSUlGbGpiQUVTTEd0cXBwWnhuSmJwZXJPelRuR2pzb0szZlpCZ1NGc3ZGT2lKWnNWWDkybFV2YVVHOUl1dFYyZWF1YnAzVXJVdE1MX3JZekFuREJ0NDBGTzNzWHVCd1FNOXd4TVZWdw?oc=5' target='_blank' rel='noopener noreferrer'>Trent Ltd (NSE: TRENT) Expands Zudio and Westside Retail Network - Kalkine India</a> (positive) – 06-Oct-2026 15:31</li><li><a href='https://news.google.com/rss/articles/CBMiigFBVV95cUxORlp6Z0ZaMWpuUkRyVTgtbklSNVlfYVNzbWZFWkZVZTFMampNZEVlVWp6OTEzbGI4Tm54V2UwanprdnBINGxKWlB3R1FKVWF6SnFaUHlOeDFEeW9MRmRGVE5TQkRwYzFuazRuUWd1YmtKcEhOZTBhRUZXNXlCSGdDUXNtRWotV0pZN2c?oc=5' target='_blank' rel='noopener noreferrer'>Trent revenue rises 23%, shares up 13% - Ahmedabad Mirror</a> (positive) – 06-Oct-2026 12:30</li></ul></td></tr><tr id='row-AXISBANK'><td style='font-weight:700;white-space:nowrap;color:#dce8f8;font-weight:700'>AXISBANK</td><td style='text-align:center;padding:7px 8px'><span style="background:#1565c0;color:#fff;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:bold;white-space:nowrap;">N50</span></td><td style='white-space:normal;word-break:normal;overflow-wrap:break-word'>Axis Bank Ltd.</td><td style='white-space:nowrap;color:#c8dcf4'>2026-10-09</td><td style='text-align:right;font-size:.94rem;white-space:nowrap'>1259.1</td><td style='font-size:.86rem;white-space:nowrap;color:inherit'>H: 1418.30<br>L: 1150.30</td><td style='font-size:.87rem'>None</td><td style='text-align:center'>No</td><td style='text-align:right;font-weight:600;white-space:nowrap;color:#f5a623'>56.11</td><td style='font-size:.87rem'>No divergence</td><td style='text-align:center'>Yes</td><td style='white-space:pre-line;font-size:.87rem'>(10,3) - No
+(10,1) - Yes</td><td style='font-size:.87rem'>Sideways</td><td style='font-size:.87rem'>Primary: Downtrend | Secondary: Sideways | Minor: Sideways</td><td style='font-size:.87rem'>Bear: Distribution</td><td style='font-size:.87rem'>Possible Range Formation (46%); Possible Cup and Handle (55%); Possible Inverse Cup and Handle (55%); ⚠ Conflicting Signals — wait for resolution</td><td style='white-space:pre-line;font-size:.87rem'>S1: 1204.79–1261.41; S2: 1146.49–1183.91
+
+R1: 1256.19–1351.81; R2: 1380.69–1422.11</td><td style='text-align:center;font-weight:700;color:#e8c300'>58.0</td><td style='font-size:.85rem;line-height:1.55;color:#dce8f8'><b>⚠ Score capped at 58 — Bearish primary trend (Bear: Markdown / Distribution).<br>Do not trade against the primary trend.</b><br><br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">PRICE ACTION</span>&nbsp;(18/25) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">70%</span></b><br>&nbsp;&nbsp;&nbsp;• Key Level     : 6/8 → breakout>1259.00 no vol confirm<br>&nbsp;&nbsp;&nbsp;• Pattern       : 5/7 → wide but trending up<br>&nbsp;&nbsp;&nbsp;• Candle        : 1/3 → small bull body<br>&nbsp;&nbsp;&nbsp;• Market Str    : 5/7 → HH+HL short-term<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">TREND</span>&nbsp;(10/20) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">50%</span></b><br>&nbsp;&nbsp;&nbsp;• EMA Alignment : 7/12 → 9>21 partial align +EMA21 respect (7x bounces)<br>&nbsp;&nbsp;&nbsp;• Dow Theory    : 2/8 → Bear Distribution ⚠<br><b style="font-size:1.05em;letter-spacing:0.03em;">🔴&nbsp;<span style="color:#ff1744;">VOLUME</span>&nbsp;(5/15) — <span style="color:#ff1744;font-weight:bold;font-size:1.0em;">33%</span></b><br>&nbsp;&nbsp;&nbsp;• Break Volume  : 1/7 → weak vol 0.8x ❌<br>&nbsp;&nbsp;&nbsp;• Volume Trend  : 4/5 → expanding<br>&nbsp;&nbsp;&nbsp;• Pullback Vol  : 0/3 → high-vol pullback ⚠<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">DELIVERY</span>&nbsp;(11/15) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">73%</span></b><br>&nbsp;&nbsp;&nbsp;• Deliv %       : 5/6 → high (61.8%)<br>&nbsp;&nbsp;&nbsp;• Deliv Trend   : 2/5 → slightly declining ⚠  [65.8% → 54.6% → 56.2% → 56.2% → 61.8%]<br>&nbsp;&nbsp;&nbsp;• Deliv Strength: 65/100 → (Moderate)<br>&nbsp;&nbsp;&nbsp;• Price Confirm : 4/4 → strong accumulation 🔥  [Price↑+Deliv↑ | score=4.5]<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">RSI MOMENTUM</span>&nbsp;(9/10) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">90%</span></b><br>&nbsp;&nbsp;&nbsp;• RSI Zone      : 5/5 → bullish (56.1)<br>&nbsp;&nbsp;&nbsp;• RSI Slope     : 2/3 → slight rise (+2.9)<br>&nbsp;&nbsp;&nbsp;• RSI Divergence: 2/2 → no div (clean)<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">MACD</span>&nbsp;(8/10) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">75%</span></b><br>&nbsp;&nbsp;&nbsp;• MACD Cross    : 3/4 → above signal<br>&nbsp;&nbsp;&nbsp;• MACD Hist     : 4/4 → positive & growing ✓<br>&nbsp;&nbsp;&nbsp;• MACD Zero Line: 1/2 → approaching zero<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">SUPERTREND</span>&nbsp;(2/5) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">40%</span></b><br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,3): 0/3 → red ⚠<br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,1): 2/2 → green ✓<br><b>🟡 SUMMARY (<span style="color:#ffd600;font-weight:bold;">58.0/100</span>)</b><br>&nbsp;&nbsp;Moderate conviction with strong momentum, positive MACD, strong delivery, but volume is below average. Wait for one more confirmation.<br><small>🟢 Strong / Bullish &nbsp;&nbsp;🟡 Neutral &nbsp;&nbsp;🔴 Weak / Bearish</small></td><td style='font-size:.84rem'><ul><li><div style="background:#1a2e1a;border:1px solid #2e7d32;border-radius:4px;padding:5px 8px;margin-bottom:6px;font-size:11px;color:#81c784;">✅ No corporate actions in the next 30 days</div></li><li><a href='https://news.google.com/rss/articles/CBMisAFBVV95cUxQemFhVjhZX1BTNGRjYnNFTk01U2p6OUlsWmtYSHc2MERmdndydGdWZEhtQ3JUYml6Sk5yVFl4OVFvTzB6Um9tNFBramYxRWFXWDFYZ2FRbi1HdFk0cUlXUHBtT0k2UGdjX2RVUTBpOHJZYTg1aFpzQWFiem92czliWUduanEzRGk3MjZMWTlZMVhHRUlxOTQwOHlRMnM1aVJoaE1lMk9KMmJyRnVBM2kyVw?oc=5' target='_blank' rel='noopener noreferrer'>India stocks lower at close of trade; Nifty 50 down 1.64% - Investing.com</a> (positive) – 08-Oct-2026 16:05</li><li><a href='https://news.google.com/rss/articles/CBMivAFBVV95cUxQQkVreDJsMDZCNzE3Vi1KcC1UVk53MDl0Rl9FeW1BeEc4b2ZLTFhoV1dFbTNiSHZVQnhwNWpydG85VEV1eGo1S3MxcDVXRkNZSXYtYUpvQW9TWHlORUkxZ2o1TENibGF2S1Zxc0NZbVJYQmFoWDl3QWFxSU5IZFdqNWUzZFg0ampwSmljeDVMb3lkV1JXNk5yd3EyeUprZllrTTVyWm1EbnZ3WC1mUnRyWUVwMlBMZHBHdUNPUA?oc=5' target='_blank' rel='noopener noreferrer'>REG - Axis Bank Ltd Axis Bank Ltd (AXBA) - updates - TradingView</a> (neutral) – 06-Oct-2026 18:18</li><li><a href='https://news.google.com/rss/articles/CBMi3AFBVV95cUxPWWhsb1hsTzZvOS10QjZsbHUtYjFDd1U0OGdndzltN0VYWHZJaVJCbmxuTFd4dldJQjZBbUc3SWZuVmJMZXctS1RIRzI2UUNLaVozNWdjV1E3X0EwS0RLeTVPYmlJR2wxaWVuUm9ONzhINUI1cjBvalAtcl9vdTdVdkVURlBLQ0UyeUZpSGQxOE1reXNKczljWWJXOFI0a3lGNk9ESUpzQUV6enRyS0xIZVFXOG9IRmVrOG1OaWE2ckY3a240ZHpLOVExdTJaZXZmc3drWmRLYnFMdXY1?oc=5' target='_blank' rel='noopener noreferrer'>Axis Bank Ltd (NSE: AXISBANK) Q2 Update: FCNR(B) Swap Facility Shapes Balance Sheet and Funding Mix - Kalkine India</a> (neutral) – 06-Oct-2026 13:11</li><li><a href='https://news.google.com/rss/articles/CBMiywFBVV95cUxPT2RHbnRkRURSREZuWjkwTHBEMTJFQjFwYTc1aUZKZTJsZWVSWF9Ya0FGUHNUckRsMHVvSTYzUTlZWVFRb3FTamV5YmVzbzB1eEFnVTVtR2lKX0NRVURlb2FGUE1GdVVXVXAzVHdwUDFuMDBSU0RxOWptZXBlSGxFQVZyZEs2U1FjWFhmWkN5LVhIMGlFUEd5Nk9jQ2lnTE9rZG5oNnlkSC16T2NtUVlMd3I4cmZxR1Q2U3o0VXpIbnA5djlPVFNRcDN4NA?oc=5' target='_blank' rel='noopener noreferrer'>KMB, Axis Bank, IndusInd Bank shares gain up to 4%, IDFC First Bank falls 3%; here&#x27;s why - BusinessToday - IndiaIPO</a> (positive) – 06-Oct-2026 12:18</li><li><a href='https://news.google.com/rss/articles/CBMijAFBVV95cUxQVTJGTjNBTndCWnlCMVF4am9OclFTVEN0clJWVXBKc3BWX0E4bDhwTUxlVWFKd0xReUJWSVl6T0M3UnExVHowUHZHdkExQ016S1MtX1lJdjNKYUNoRzBpM19fbTZYeTNOVGpNY0NPMTQydUdvWDZWMGFveE12Umh4eVRkVC02b1FMYVJhZQ?oc=5' target='_blank' rel='noopener noreferrer'>Top 12 Bank Stocks To Buy In India October 2026 - Samco</a> (positive) – 01-Oct-2026 12:21</li></ul></td></tr></tbody></table>
+<div style='text-align:right;padding:6px 4px 4px;margin-top:4px;'><a href='#section-2' style='font-size:.78rem;color:var(--text-muted);text-decoration:none;opacity:.7;'>&#8593;&nbsp;Back to top of this section</a></div>
+</div></div>
+
+<div class='section-block' id='section-8'><div class='section-head'><h2>Pullback to (or Nearing) EMA 9 Report</h2><span class='section-badge'>— signals</span><button class='section-toggle'>&#9650; Collapse</button></div><div class='section-body'>
+<div class='empty'><p>No stock met the pullback-to-EMA-9 conditions on the latest trading day.</p></div>
+<div style='text-align:right;padding:6px 4px 4px;margin-top:4px;'><a href='#section-8' style='font-size:.78rem;color:var(--text-muted);text-decoration:none;opacity:.7;'>&#8593;&nbsp;Back to top of this section</a></div>
+</div></div>
+
+<div class='section-block' id='section-9'><div class='section-head'><h2>Pullback to (or Nearing) EMA 21 Report</h2><span class='section-badge'>— signals</span><button class='section-toggle'>&#9650; Collapse</button></div><div class='section-body'>
+<div class='empty'><p>No stock met the pullback-to-EMA-21 conditions on the latest trading day.</p></div>
+<div style='text-align:right;padding:6px 4px 4px;margin-top:4px;'><a href='#section-9' style='font-size:.78rem;color:var(--text-muted);text-decoration:none;opacity:.7;'>&#8593;&nbsp;Back to top of this section</a></div>
+</div></div>
+
+<div class='section-block' id='section-3'><div class='section-head'><h2>EMA Ribbon &#8211; EMA 10 &gt; EMA 20 &gt; EMA 50 &gt; EMA 200 Bullish Report &#8211; Today (New Entry)</h2><span class='section-badge'>— signals</span><button class='section-toggle'>&#9650; Collapse</button></div><div class='section-body'>
+<div class='empty'><p>No stock met the rule: EMA 10 &gt; EMA 20 &gt; EMA 50 &gt; EMA 200 (new entry on latest trading day).</p></div>
+<div style='text-align:right;padding:6px 4px 4px;margin-top:4px;'><a href='#section-3' style='font-size:.78rem;color:var(--text-muted);text-decoration:none;opacity:.7;'>&#8593;&nbsp;Back to top of this section</a></div>
+</div></div>
+
+<div class='section-block' id='section-4'><div class='section-head'><h2>EMA Ribbon &#8211; EMA 10 &gt; EMA 20 &gt; EMA 50 &gt; EMA 200 Bullish Report &#8211; Cumulative (Tiered)</h2><span class='section-badge'>3 signals</span><button class='section-toggle'>&#9650; Collapse</button></div><div class='section-body'><div style='display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px;padding:12px 16px;background:#0a1628;border:1px solid #1a3560;border-radius:8px;'><span style='font-size:.87rem;color:#8aafd4'>Ribbon-aligned stocks today: <b style='color:#dce8f8;font-size:1rem'>3</b></span><span style='color:#1a3560;font-size:1.2rem'>|</span><span style='font-size:.87rem'>🟢 Strong <b style='color:#4ecb82'>1</b></span><span style='font-size:.87rem'>🟡 Moderate <b style='color:#e8c300'>1</b></span><span style='font-size:.87rem'>🔴 Weak <b style='color:#f06464'>1</b></span><span style='margin-left:auto;font-size:.78rem;color:#6a8cb8;font-style:italic'>Strong expanded by default · click tier header to toggle</span></div><div style='margin-bottom:14px;border:1px solid #1a3560;border-radius:8px;overflow:hidden'><div style='background:#1a472a;padding:9px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none' onclick="var b=document.getElementById('tier-strong-rbn4');var btn=document.getElementById('btn-tier-strong-rbn4');if(b.style.display==='none'){b.style.display='';btn.textContent='▲ Collapse';}else{b.style.display='none';btn.textContent='▼ Expand (1)';}"><span style='font-size:.95rem;font-weight:700;color:#fff'>🟢 Strong</span><span style='background:rgba(255,255,255,.2);color:#fff;font-size:.78rem;padding:2px 9px;border-radius:12px;font-weight:600'>1 stock</span><button id='btn-tier-strong-rbn4' style='margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:5px;padding:2px 10px;font-size:.78rem;cursor:pointer;pointer-events:none'>▲ Collapse</button></div><div id='tier-strong-rbn4' style=''><table id='tbl5'><thead><tr><th class='th-sort' data-col='0' data-numeric='0' data-dir='none'>Symbol <span class='sort-arrow'></span></th><th class='th-sort' data-col='1' data-numeric='0' data-dir='none'>Index <span class='sort-arrow'></span></th><th class='th-sort' data-col='2' data-numeric='0' data-dir='none'>Company <span class='sort-arrow'></span></th><th class='th-sort' data-col='3' data-numeric='0' data-dir='none'>Date <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='4' data-numeric='1' data-dir='none'>Last Close <span class='sort-arrow'></span></th><th class='th-sort' data-col='5' data-numeric='0' data-dir='none'>52W H/L <span class='sort-arrow'></span></th><th class='th-sort' data-col='6' data-numeric='0' data-dir='none'>Candle <span class='sort-arrow'></span></th><th class='th-sort' data-col='7' data-numeric='0' data-dir='none'>Vol>14D <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='8' data-numeric='1' data-dir='none'>RSI <span class='sort-arrow'></span></th><th class='th-sort' data-col='9' data-numeric='0' data-dir='none'>RSI Div <span class='sort-arrow'></span></th><th class='th-sort' data-col='10' data-numeric='0' data-dir='none'>MACD > Sig <span class='sort-arrow'></span></th><th class='th-sort' data-col='11' data-numeric='0' data-dir='none'>ST(10,3)/(10,1) <span class='sort-arrow'></span></th><th class='th-sort' data-col='12' data-numeric='0' data-dir='none'>Momentum <span class='sort-arrow'></span></th><th class='th-sort' data-col='13' data-numeric='0' data-dir='none'>DT Trend <span class='sort-arrow'></span></th><th class='th-sort' data-col='14' data-numeric='0' data-dir='none'>DT Phase <span class='sort-arrow'></span></th><th class='th-sort' data-col='15' data-numeric='0' data-dir='none'>Chart Pat. <span class='sort-arrow'></span></th><th class='th-sort' data-col='16' data-numeric='0' data-dir='none'>Sup/Res <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='17' data-numeric='1' data-dir='desc'>Conv Score &#9660;</th><th class='th-sort' data-col='18' data-numeric='0' data-dir='none'>Conv Explanation <span class='sort-arrow'></span></th><th class='th-sort' data-col='19' data-numeric='0' data-dir='none'>News <span class='sort-arrow'></span></th></tr></thead><tbody><tr id='row-KOTAKBANK'><td style='font-weight:700;white-space:nowrap;color:#dce8f8'>KOTAKBANK</td><td style='text-align:center;padding:7px 8px'><span style="background:#1565c0;color:#fff;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:bold;white-space:nowrap;">N50</span></td><td style='white-space:normal;word-break:normal;overflow-wrap:break-word'>Kotak Mahindra Bank Ltd.</td><td style='white-space:nowrap;color:#c8dcf4'>2026-10-09</td><td style='text-align:right;font-size:.94rem;white-space:nowrap'>441.0</td><td style='font-size:.86rem;white-space:nowrap;color:inherit'>H: 453.20<br>L: 345.50</td><td style='font-size:.87rem'>None</td><td style='text-align:center'>Yes</td><td style='text-align:right;font-weight:600;white-space:nowrap;color:#4ecb82'>68.05</td><td style='font-size:.87rem'>No divergence</td><td style='text-align:center'>Yes</td><td style='white-space:pre-line;font-size:.87rem'>(10,3) - Yes
+(10,1) - Yes</td><td style='font-size:.87rem'>Bullish</td><td style='font-size:.87rem'>Primary: Uptrend | Secondary: Sideways | Minor: Sideways</td><td style='font-size:.87rem'>Bull: Accumulation</td><td style='font-size:.87rem'>Possible Bullish Flag (50%); Bullish Range Breakout (90%); Possible Cup and Handle (55%)</td><td style='white-space:pre-line;font-size:.87rem'>S1: 361.54–434.06
+
+R1: 439.54–454.66</td><td style='text-align:center;font-weight:700;color:#4ecb82'>82.5</td><td style='font-size:.85rem;line-height:1.55;color:#dce8f8'><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">PRICE ACTION</span>&nbsp;(16/25) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">64%</span></b><br>&nbsp;&nbsp;&nbsp;• Key Level     : 6/8 → nearing resistance 441.50<br>&nbsp;&nbsp;&nbsp;• Pattern       : 3/7 → wide range<br>&nbsp;&nbsp;&nbsp;• Candle        : 1/3 → small bull body<br>&nbsp;&nbsp;&nbsp;• Market Str    : 7/7 → HH+HL both TFs ✓<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">TREND</span>&nbsp;(18/20) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">90%</span></b><br>&nbsp;&nbsp;&nbsp;• EMA Alignment : 12/12 → 9>21>50 price>EMA9 ✓<br>&nbsp;&nbsp;&nbsp;• Dow Theory    : 6/8 → Bull Accumulation<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">VOLUME</span>&nbsp;(11/15) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">73%</span></b><br>&nbsp;&nbsp;&nbsp;• Break Volume  : 4/7 → decent vol 1.3x<br>&nbsp;&nbsp;&nbsp;• Volume Trend  : 5/5 → expanding strongly ✓<br>&nbsp;&nbsp;&nbsp;• Pullback Vol  : 2/3 → moderate pullback vol<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">DELIVERY</span>&nbsp;(15/15) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">100%</span></b><br>&nbsp;&nbsp;&nbsp;• Deliv %       : 6/6 → very high (72.4%) 🔥<br>&nbsp;&nbsp;&nbsp;• Deliv Trend   : 4/5 → moderate accumulation  [64.4% → 63.7% → 70.7% → 65.0% → 72.4%] (+net boost)<br>&nbsp;&nbsp;&nbsp;• Deliv Strength: 88/100 → (Strong)<br>&nbsp;&nbsp;&nbsp;• Price Confirm : 4/4 → strong accumulation 🔥  [Price↑+Deliv↑ | score=5.0]<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">RSI MOMENTUM</span>&nbsp;(9/10) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">90%</span></b><br>&nbsp;&nbsp;&nbsp;• RSI Zone      : 5/5 → bullish (68.1)<br>&nbsp;&nbsp;&nbsp;• RSI Slope     : 2/3 → slight rise (+1.9)<br>&nbsp;&nbsp;&nbsp;• RSI Divergence: 2/2 → no div (clean)<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">MACD</span>&nbsp;(8/10) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">85%</span></b><br>&nbsp;&nbsp;&nbsp;• MACD Cross    : 3/4 → above signal<br>&nbsp;&nbsp;&nbsp;• MACD Hist     : 4/4 → positive & growing ✓<br>&nbsp;&nbsp;&nbsp;• MACD Zero Line: 2/2 → above zero ✓<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">SUPERTREND</span>&nbsp;(5/5) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">100%</span></b><br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,3): 3/3 → green ✓<br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,1): 2/2 → green ✓<br><b>🟢 SUMMARY (<span style="color:#00c853;font-weight:bold;">82.5/100</span>)</b><br>&nbsp;&nbsp;High conviction — all major factors aligned bullish.<br><small>🟢 Strong / Bullish &nbsp;&nbsp;🟡 Neutral &nbsp;&nbsp;🔴 Weak / Bearish</small></td><td style='font-size:.84rem'><ul><li><div style="background:#1a2e1a;border:1px solid #2e7d32;border-radius:4px;padding:5px 8px;margin-bottom:6px;font-size:11px;color:#81c784;">✅ No corporate actions in the next 30 days</div></li><li><a href='https://news.google.com/rss/articles/CBMisAFBVV95cUxPWkhIbEltSFh6T0J1cG5uc2FRaEoyR1JITnltZTdkcENKWnh3X0Juamt6NHVTOXdOWWdBQ2V3SlJoRzlsWnBPa0VPY2xIRmFiLWRyODI3Vk5OTmQwSEFteWFTV2JhdXk2RG5zXzh5eVZndGVJWnYtd1pNYzZyRzVDdi1ISW9Wdmp2ZFlaRVIwWndqdkpyWE1QSzRTMGg2dENoWjlXVjJPblBCSWZUbll3VA?oc=5' target='_blank' rel='noopener noreferrer'>India stocks lower at close of trade; Nifty 50 down 0.76% - Investing.com</a> (positive) – 07-Oct-2026 16:07</li><li><a href='https://news.google.com/rss/articles/CBMifEFVX3lxTE9xMGYxaHJvbWxWa0RMcVM0MTUtWEd4SHZORmhwSk9mQ2dXYS1CdlNvWWhCVUVnWFRxUG4xOVJ1YV9TSTdfY3c0V2ZSSDM4NVNVcnpqR2RIVTRCN1lkSjBxU1UxMGZnUWlHai1RSmZoakN4RkloMVdLeUVPdG0?oc=5' target='_blank' rel='noopener noreferrer'>Canara Bank Share Price Today,, CANBK Share Price NSE, BSE - Business Today</a> (positive) – 07-Oct-2026 15:59</li><li><a href='https://news.google.com/rss/articles/CBMirwFBVV95cUxQcDNabWNqRDVWaEtRZjhBQ2E2T1lVV184MTdCNkZTNl91ZmxfaTFaSkdjNTE3REVhb1RVSU55WERpVUxqZFhENHZMSzdCRjVyLUdQWGtMazdGWGlmNDJyYlhmbWIwZ3c4WEUyRDBFWTFFQkpUb3c5TGZaaXJvZmxqc0pNX1JURnFaTGl3VlVkWmtCZ0djWHd1NTNBVzVYTVFtV2Y0eFZkMmZVMnJzbWhZ?oc=5' target='_blank' rel='noopener noreferrer'>India stocks higher at close of trade; Nifty 50 up 0.98% - Investing.com</a> (positive) – 06-Oct-2026 16:04</li><li><a href='https://news.google.com/rss/articles/CBMijgFBVV95cUxQc0g0SVR3bG1lZXNSVk1udUpLSEstNVFJalNJMHZjelpwdlllRmE4VDFyZ2FsOXJicmF6aXFma0JXTzFaZnViZDVXN3h6bFQzWWtfVlEzVVFwWUpkajFPdUZrcnRCTnJYLWRNei1faklTNmtPM3lYR0J4WVZnV3MzSktKeEpwOHlCcTFyZnpR?oc=5' target='_blank' rel='noopener noreferrer'>IDFC First Bank Ltd Share Price Today,, IDFCFIRSTB Share Price NSE, BSE - Business Today</a> (positive) – 06-Oct-2026 15:59</li><li><a href='https://news.google.com/rss/articles/CBMihwFBVV95cUxPR0FQbktyYmJwbnp6R3A5U281OHRaSi1BM0R0UVd0OENZZXNrUzR5cXJTN2RaczgwTXRQLWVDNUNUVGNFUEVtN0lmaTN3NFo3Q3FkUkZQREJWQTBwM2htckx3VmlFdWVnTXBabjVIaGNBWlpwNnJVS0QyWjg3QzVWWU4wWEx6MEE?oc=5' target='_blank' rel='noopener noreferrer'>Bank of Baroda (BANKBARODA) Share Price - Business Today</a> (positive) – 06-Oct-2026 13:36</li></ul></td></tr></tbody></table></div></div><div style='margin-bottom:14px;border:1px solid #1a3560;border-radius:8px;overflow:hidden'><div style='background:#5a4000;padding:9px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none' onclick="var b=document.getElementById('tier-moderate-rbn4');var btn=document.getElementById('btn-tier-moderate-rbn4');if(b.style.display==='none'){b.style.display='';btn.textContent='▲ Collapse';}else{b.style.display='none';btn.textContent='▼ Expand (1)';}"><span style='font-size:.95rem;font-weight:700;color:#fff'>🟡 Moderate</span><span style='background:rgba(255,255,255,.2);color:#fff;font-size:.78rem;padding:2px 9px;border-radius:12px;font-weight:600'>1 stock</span><button id='btn-tier-moderate-rbn4' style='margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:5px;padding:2px 10px;font-size:.78rem;cursor:pointer;pointer-events:none'>▼ Expand (1)</button></div><div id='tier-moderate-rbn4' style='display:none'><table id='tbl6'><thead><tr><th class='th-sort' data-col='0' data-numeric='0' data-dir='none'>Symbol <span class='sort-arrow'></span></th><th class='th-sort' data-col='1' data-numeric='0' data-dir='none'>Index <span class='sort-arrow'></span></th><th class='th-sort' data-col='2' data-numeric='0' data-dir='none'>Company <span class='sort-arrow'></span></th><th class='th-sort' data-col='3' data-numeric='0' data-dir='none'>Date <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='4' data-numeric='1' data-dir='none'>Last Close <span class='sort-arrow'></span></th><th class='th-sort' data-col='5' data-numeric='0' data-dir='none'>52W H/L <span class='sort-arrow'></span></th><th class='th-sort' data-col='6' data-numeric='0' data-dir='none'>Candle <span class='sort-arrow'></span></th><th class='th-sort' data-col='7' data-numeric='0' data-dir='none'>Vol>14D <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='8' data-numeric='1' data-dir='none'>RSI <span class='sort-arrow'></span></th><th class='th-sort' data-col='9' data-numeric='0' data-dir='none'>RSI Div <span class='sort-arrow'></span></th><th class='th-sort' data-col='10' data-numeric='0' data-dir='none'>MACD > Sig <span class='sort-arrow'></span></th><th class='th-sort' data-col='11' data-numeric='0' data-dir='none'>ST(10,3)/(10,1) <span class='sort-arrow'></span></th><th class='th-sort' data-col='12' data-numeric='0' data-dir='none'>Momentum <span class='sort-arrow'></span></th><th class='th-sort' data-col='13' data-numeric='0' data-dir='none'>DT Trend <span class='sort-arrow'></span></th><th class='th-sort' data-col='14' data-numeric='0' data-dir='none'>DT Phase <span class='sort-arrow'></span></th><th class='th-sort' data-col='15' data-numeric='0' data-dir='none'>Chart Pat. <span class='sort-arrow'></span></th><th class='th-sort' data-col='16' data-numeric='0' data-dir='none'>Sup/Res <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='17' data-numeric='1' data-dir='desc'>Conv Score &#9660;</th><th class='th-sort' data-col='18' data-numeric='0' data-dir='none'>Conv Explanation <span class='sort-arrow'></span></th><th class='th-sort' data-col='19' data-numeric='0' data-dir='none'>News <span class='sort-arrow'></span></th></tr></thead><tbody><tr id='row-ADANIPORTS'><td style='font-weight:700;white-space:nowrap;color:#dce8f8'>ADANIPORTS</td><td style='text-align:center;padding:7px 8px'><span style="background:#1565c0;color:#fff;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:bold;white-space:nowrap;">N50</span></td><td style='white-space:normal;word-break:normal;overflow-wrap:break-word'>Adani Ports and Special Economic Zone Ltd.</td><td style='white-space:nowrap;color:#c8dcf4'>2026-10-09</td><td style='text-align:right;font-size:.94rem;white-space:nowrap'>1761.0</td><td style='font-size:.86rem;white-space:nowrap;color:inherit'>H: 1891.10<br>L: 1292.00</td><td style='font-size:.87rem'>None</td><td style='text-align:center'>Yes</td><td style='text-align:right;font-weight:600;white-space:nowrap;color:#f5a623'>50.84</td><td style='font-size:.87rem'>Bearish divergence</td><td style='text-align:center'>No</td><td style='white-space:pre-line;font-size:.87rem'>(10,3) - Yes
+(10,1) - Yes</td><td style='font-size:.87rem'>Sideways</td><td style='font-size:.87rem'>Primary: Sideways | Secondary: Sideways | Minor: Sideways</td><td style='font-size:.87rem'>Consolidation</td><td style='font-size:.87rem'>Possible Cup and Handle (55%)</td><td style='white-space:pre-line;font-size:.87rem'>S1: 1699.85–1723.15; S2: 1633.25–1657.15
+
+R1: 1784.85–1866.85</td><td style='text-align:center;font-weight:700;color:#e8c300'>63.2</td><td style='font-size:.85rem;line-height:1.55;color:#dce8f8'><b style="font-size:1.05em;letter-spacing:0.03em;">🔴&nbsp;<span style="color:#ff1744;">PRICE ACTION</span>&nbsp;(9/25) — <span style="color:#ff1744;font-weight:bold;font-size:1.0em;">37%</span></b><br>&nbsp;&nbsp;&nbsp;• Key Level     : 2/8 → mid-range<br>&nbsp;&nbsp;&nbsp;• Pattern       : 4/7 → moderate-wide trending<br>&nbsp;&nbsp;&nbsp;• Candle        : 3/3 → strong bull@high<br>&nbsp;&nbsp;&nbsp;• Market Str    : 0/7 → no HH+HL ⚠<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">TREND</span>&nbsp;(16/20) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">80%</span></b><br>&nbsp;&nbsp;&nbsp;• EMA Alignment : 12/12 → 9>21>50 price>EMA9 ✓<br>&nbsp;&nbsp;&nbsp;• Dow Theory    : 4/8 → Consolidation<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">VOLUME</span>&nbsp;(13/15) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">87%</span></b><br>&nbsp;&nbsp;&nbsp;• Break Volume  : 7/7 → climactic spike 4.5x 🔥<br>&nbsp;&nbsp;&nbsp;• Volume Trend  : 5/5 → expanding strongly ✓<br>&nbsp;&nbsp;&nbsp;• Pullback Vol  : 1/3 → avg pullback vol<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">DELIVERY</span>&nbsp;(12/15) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">80%</span></b><br>&nbsp;&nbsp;&nbsp;• Deliv %       : 6/6 → very high (84.5%) 🔥<br>&nbsp;&nbsp;&nbsp;• Deliv Trend   : 3/5 → choppy/indecisive  [59.2% → 52.4% → 49.2% → 49.9% → 84.5%] (+net boost)<br>&nbsp;&nbsp;&nbsp;• Deliv Strength: 83/100 → (Strong)<br>&nbsp;&nbsp;&nbsp;• Price Confirm : 2/4 → mixed but acceptable  [Price↓+Deliv↑ | score=3.0]<br><b style="font-size:1.05em;letter-spacing:0.03em;">🔴&nbsp;<span style="color:#ff1744;">RSI MOMENTUM</span>&nbsp;(4/10) — <span style="color:#ff1744;font-weight:bold;font-size:1.0em;">35%</span></b><br>&nbsp;&nbsp;&nbsp;• RSI Zone      : 4/5 → above50 (50.8)<br>&nbsp;&nbsp;&nbsp;• RSI Slope     : 0/3 → falling (-2.6) ⚠<br>&nbsp;&nbsp;&nbsp;• RSI Divergence: 0/2 → bearish div ⚠<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">MACD</span>&nbsp;(4/10) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">45%</span></b><br>&nbsp;&nbsp;&nbsp;• MACD Cross    : 0/4 → below signal ⚠<br>&nbsp;&nbsp;&nbsp;• MACD Hist     : 3/4 → growing (still neg)<br>&nbsp;&nbsp;&nbsp;• MACD Zero Line: 2/2 → above zero ✓<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">SUPERTREND</span>&nbsp;(5/5) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">100%</span></b><br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,3): 3/3 → green ✓<br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,1): 2/2 → green ✓<br><b>🟡 SUMMARY (<span style="color:#ffd600;font-weight:bold;">63.2/100</span>)</b><br>&nbsp;&nbsp;Moderate conviction with strong trend, healthy volume, strong delivery, but price action is mixed. Wait for one more confirmation.<br><small>🟢 Strong / Bullish &nbsp;&nbsp;🟡 Neutral &nbsp;&nbsp;🔴 Weak / Bearish</small></td><td style='font-size:.84rem'><ul><li><div style="background:#1a2e1a;border:1px solid #2e7d32;border-radius:4px;padding:5px 8px;margin-bottom:6px;font-size:11px;color:#81c784;">✅ No corporate actions in the next 30 days</div></li><li><a href='https://news.google.com/rss/articles/CBMirwFBVV95cUxOczExbEJlbWs4bFVZYWZEVVZMaE1RZUNER3dqSDhqQmdncTNKUXZ6bGdWZWtUU3QzMDdKcjAwNDNEWk13Snc4THc5amx0cW8xQlFQdjZTQkFmaW5MTWQzY2UyVFBxZEpncko5dE9NOEFXc1VLdWxEUlhCWERab2NYY3NRV2FHdEdhVDI2VDJlYmZZQUQ4eEpGVGhSQTJBVEpDR3dDRTFad0RQRmE0UXA4?oc=5' target='_blank' rel='noopener noreferrer'>India stocks higher at close of trade; Nifty 50 up 1.30% - Investing.com</a> (positive) – 09-Oct-2026 16:25</li><li><a href='https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9UeDhGWHFfOW5Ya2NqOS11UTlxUHJ1RE1LNnFQNERKcVlXMnVzdFJiOG8zb0VfbXhlREZFa29Fb2JidFRYNlpHWllXdy05cmY2OWE4ZnZXTXdGT2ZxLWdqQVNMTFg2b1E?oc=5' target='_blank' rel='noopener noreferrer'>News by CNBC TV18 on TradingView, 2026-10-09 — cnbctv:358b2c236094b:0 - TradingView</a> (neutral) – 09-Oct-2026 16:19</li><li><a href='https://news.google.com/rss/articles/CBMi5gFBVV95cUxOSWJMUlNGaXpRNEpPSGpvbjVPZjVacmVIY1ZFLTNxQnZFT0JSaW5KQk14dC1rQTBWeEo0YUx1X0REb2V6RjFvTzhucEEwcmZfMHZONktJbHI2Mm1wNlpJakpsNXB0QmV5VnRrUjYtX3ExdkdZYVJMYTQyeE8xZVpJS2FBVzdOdnF3VFF6YzRTLUgtTGhzMjV2UnVsYUNrbXZtcHBCeFBnWTFMS1hHdFBGZW5DVllmNEtJMS12WHNLcl9ySkc5Q3FHOTNlaEh2Q09ncFpGaGIwYkdOb01oc1MxZEtjUXBldw?oc=5' target='_blank' rel='noopener noreferrer'>Adani Ports के शेयर में 5.5% की बढ़त, कंपनी ने 500 मिलियन टन माल संभालने की बड़ी उपलब्धि हासिल की। - Alice Blue</a> (neutral) – 06-Oct-2026 07:33</li><li><a href='https://news.google.com/rss/articles/CBMivAFBVV95cUxQSm1tMDVreFVtZ3FzOEJQaWpHbVJfdkhWbERJS2V6U1c2MUdTOGtUcndwWkMzeG42cDhZVVV2NXhGNV90U3AxSmRYS2NhVUtMWUJwekdCVXlxYVRfdTlaWk41bVVCV1RYTkh6VHBoTTNNT3B5alNuMm04OXltR0Z1RUdhOG5FN2FWUV9rUDFuNHFkaHJpcDF5UDN6ZHNnYk5TMDVHU21qSTl1QnJvWXJaMHJjbTlHLXVVVWptOQ?oc=5' target='_blank' rel='noopener noreferrer'>Adani Ports board to meet on July 29 to consider Q1FY27 results - scanx.trade</a> (neutral) – 04-Oct-2026 10:25</li><li><a href='https://news.google.com/rss/articles/CBMikwFBVV95cUxOdXc3YnppbkVRc1M2ZmotTUFZcFQtNzg5WGt5aW1NYW1MSURkaXVRRlZCbWZMUnJpX2FCLWlWOXBTV09CRngtVHRHcGR3LW5HNHg2SWV5d1pZenFlQmZkdmxhVTE3eWJIcllWaUNUVWVhaEtodllzMV9wczhTODRkRS1LaDdKaWo0aFJReklvX0RZaUE?oc=5' target='_blank' rel='noopener noreferrer'>Top 30 Stocks for New Investors in 2026 - Samco</a> (positive) – 02-Oct-2026 12:21</li></ul></td></tr></tbody></table></div></div><div style='margin-bottom:14px;border:1px solid #1a3560;border-radius:8px;overflow:hidden'><div style='background:#5a1a1a;padding:9px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none' onclick="var b=document.getElementById('tier-weak-rbn4');var btn=document.getElementById('btn-tier-weak-rbn4');if(b.style.display==='none'){b.style.display='';btn.textContent='▲ Collapse';}else{b.style.display='none';btn.textContent='▼ Expand (1)';}"><span style='font-size:.95rem;font-weight:700;color:#fff'>🔴 Weak</span><span style='background:rgba(255,255,255,.2);color:#fff;font-size:.78rem;padding:2px 9px;border-radius:12px;font-weight:600'>1 stock</span><button id='btn-tier-weak-rbn4' style='margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:5px;padding:2px 10px;font-size:.78rem;cursor:pointer;pointer-events:none'>▼ Expand (1)</button></div><div id='tier-weak-rbn4' style='display:none'><table id='tbl7'><thead><tr><th class='th-sort' data-col='0' data-numeric='0' data-dir='none'>Symbol <span class='sort-arrow'></span></th><th class='th-sort' data-col='1' data-numeric='0' data-dir='none'>Index <span class='sort-arrow'></span></th><th class='th-sort' data-col='2' data-numeric='0' data-dir='none'>Company <span class='sort-arrow'></span></th><th class='th-sort' data-col='3' data-numeric='0' data-dir='none'>Date <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='4' data-numeric='1' data-dir='none'>Last Close <span class='sort-arrow'></span></th><th class='th-sort' data-col='5' data-numeric='0' data-dir='none'>52W H/L <span class='sort-arrow'></span></th><th class='th-sort' data-col='6' data-numeric='0' data-dir='none'>Candle <span class='sort-arrow'></span></th><th class='th-sort' data-col='7' data-numeric='0' data-dir='none'>Vol>14D <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='8' data-numeric='1' data-dir='none'>RSI <span class='sort-arrow'></span></th><th class='th-sort' data-col='9' data-numeric='0' data-dir='none'>RSI Div <span class='sort-arrow'></span></th><th class='th-sort' data-col='10' data-numeric='0' data-dir='none'>MACD > Sig <span class='sort-arrow'></span></th><th class='th-sort' data-col='11' data-numeric='0' data-dir='none'>ST(10,3)/(10,1) <span class='sort-arrow'></span></th><th class='th-sort' data-col='12' data-numeric='0' data-dir='none'>Momentum <span class='sort-arrow'></span></th><th class='th-sort' data-col='13' data-numeric='0' data-dir='none'>DT Trend <span class='sort-arrow'></span></th><th class='th-sort' data-col='14' data-numeric='0' data-dir='none'>DT Phase <span class='sort-arrow'></span></th><th class='th-sort' data-col='15' data-numeric='0' data-dir='none'>Chart Pat. <span class='sort-arrow'></span></th><th class='th-sort' data-col='16' data-numeric='0' data-dir='none'>Sup/Res <span class='sort-arrow'></span></th><th class='th-sort th-num' data-col='17' data-numeric='1' data-dir='desc'>Conv Score &#9660;</th><th class='th-sort' data-col='18' data-numeric='0' data-dir='none'>Conv Explanation <span class='sort-arrow'></span></th><th class='th-sort' data-col='19' data-numeric='0' data-dir='none'>News <span class='sort-arrow'></span></th></tr></thead><tbody><tr id='row-DIVISLAB'><td style='font-weight:700;white-space:nowrap;color:#dce8f8'>DIVISLAB</td><td style='text-align:center;padding:7px 8px'><span style="background:#e65100;color:#fff;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:bold;white-space:nowrap;">NN50</span></td><td style='white-space:normal;word-break:normal;overflow-wrap:break-word'>Divi's Laboratories Ltd.</td><td style='white-space:nowrap;color:#c8dcf4'>2026-10-09</td><td style='text-align:right;font-size:.94rem;white-space:nowrap'>9340.0</td><td style='font-size:.86rem;white-space:nowrap;color:inherit'>H: 9740.00<br>L: 5647.50</td><td style='font-size:.87rem'>None</td><td style='text-align:center'>No</td><td style='text-align:right;font-weight:600;white-space:nowrap;color:#f5a623'>52.25</td><td style='font-size:.87rem'>No divergence</td><td style='text-align:center'>No</td><td style='white-space:pre-line;font-size:.87rem'>(10,3) - Yes
+(10,1) - No</td><td style='font-size:.87rem'>Sideways</td><td style='font-size:.87rem'>Primary: Sideways | Secondary: Sideways | Minor: Sideways</td><td style='font-size:.87rem'>Consolidation</td><td style='font-size:.87rem'>Bullish Flag (85%); Possible Bullish Rectangle (50%)</td><td style='white-space:pre-line;font-size:.87rem'>S1: 8891.60–9109.40; S2: 5895.60–6991.90
+
+R1: 9708.60–9771.40</td><td style='text-align:center;font-weight:700;color:#e8c300'>46.5</td><td style='font-size:.85rem;line-height:1.55;color:#dce8f8'><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">PRICE ACTION</span>&nbsp;(10/25) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">40%</span></b><br>&nbsp;&nbsp;&nbsp;• Key Level     : 2/8 → mid-range<br>&nbsp;&nbsp;&nbsp;• Pattern       : 3/7 → wide range<br>&nbsp;&nbsp;&nbsp;• Candle        : 1/3 → bearish candle<br>&nbsp;&nbsp;&nbsp;• Market Str    : 5/7 → HH+HL short-term<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟢&nbsp;<span style="color:#00c853;">TREND</span>&nbsp;(15/20) — <span style="color:#00c853;font-weight:bold;font-size:1.0em;">75%</span></b><br>&nbsp;&nbsp;&nbsp;• EMA Alignment : 10/12 → 9>21>50 price<=EMA9 +EMA21 respect (2x bounces)<br>&nbsp;&nbsp;&nbsp;• Dow Theory    : 4/8 → Consolidation<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">VOLUME</span>&nbsp;(6/15) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">40%</span></b><br>&nbsp;&nbsp;&nbsp;• Break Volume  : 1/7 → weak vol 0.8x ❌<br>&nbsp;&nbsp;&nbsp;• Volume Trend  : 3/5 → flat/neutral<br>&nbsp;&nbsp;&nbsp;• Pullback Vol  : 2/3 → moderate pullback vol<br><b style="font-size:1.05em;letter-spacing:0.03em;">🔴&nbsp;<span style="color:#ff1744;">DELIVERY</span>&nbsp;(5/15) — <span style="color:#ff1744;font-weight:bold;font-size:1.0em;">33%</span></b><br>&nbsp;&nbsp;&nbsp;• Deliv %       : 3/6 → moderate (58.3%)<br>&nbsp;&nbsp;&nbsp;• Deliv Trend   : 2/5 → slightly declining ⚠  [71.4% → 63.4% → 62.5% → 61.7% → 58.3%] (-net penalty)<br>&nbsp;&nbsp;&nbsp;• Deliv Strength: 38/100 → (Weak)<br>&nbsp;&nbsp;&nbsp;• Price Confirm : 1/4 → weak/speculative rally ⚠  [Price↓+Deliv↓ | score=-0.5]<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">RSI MOMENTUM</span>&nbsp;(6/10) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">55%</span></b><br>&nbsp;&nbsp;&nbsp;• RSI Zone      : 4/5 → above50 (52.3)<br>&nbsp;&nbsp;&nbsp;• RSI Slope     : 0/3 → falling (-8.2) ⚠<br>&nbsp;&nbsp;&nbsp;• RSI Divergence: 2/2 → no div (clean)<br><b style="font-size:1.05em;letter-spacing:0.03em;">🔴&nbsp;<span style="color:#ff1744;">MACD</span>&nbsp;(2/10) — <span style="color:#ff1744;font-weight:bold;font-size:1.0em;">20%</span></b><br>&nbsp;&nbsp;&nbsp;• MACD Cross    : 0/4 → below signal ⚠<br>&nbsp;&nbsp;&nbsp;• MACD Hist     : 0/4 → negative & falling ⚠<br>&nbsp;&nbsp;&nbsp;• MACD Zero Line: 2/2 → above zero ✓<br><b style="font-size:1.05em;letter-spacing:0.03em;">🟡&nbsp;<span style="color:#ffd600;">SUPERTREND</span>&nbsp;(3/5) — <span style="color:#ffd600;font-weight:bold;font-size:1.0em;">60%</span></b><br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,3): 3/3 → green ✓<br>&nbsp;&nbsp;&nbsp;• SuperTrend(10,1): 0/2 → red<br><b>🟡 SUMMARY (<span style="color:#ffd600;font-weight:bold;">46.5/100</span>)</b><br>&nbsp;&nbsp;Low conviction — watchlist only; do not trade yet.<br><small>🟢 Strong / Bullish &nbsp;&nbsp;🟡 Neutral &nbsp;&nbsp;🔴 Weak / Bearish</small></td><td style='font-size:.84rem'><ul><li><div style="background:#1a2e1a;border:1px solid #2e7d32;border-radius:4px;padding:5px 8px;margin-bottom:6px;font-size:11px;color:#81c784;">✅ No corporate actions in the next 30 days</div></li><li><a href='https://news.google.com/rss/articles/CBMiigFBVV95cUxNSmxaNUxpT2wtdzdBOEMwZ18tbzhmM3NVOXN1RXlaTy1wR1N2SmZRb0RKSlZPSUpvRnhxaTlHQnBpYXV5X2RhNHNlYnEtYjctblphSkpUbWJHRDRoRWZwY3ZXMmMwRlBYZWR2TFhMcUhHU0lOd19VVmY4a0pxYUF2djNyOWp0TE9Rc0E?oc=5' target='_blank' rel='noopener noreferrer'>Top 14 Pharma Stocks To Buy In India October 2026 - Samco</a> (positive) – 09-Oct-2026 12:20</li><li><a href='https://news.google.com/rss/articles/CBMiiwFBVV95cUxQc3ZkYjFmN2RaOHM4VGt0S3UxTWluYnlQTVNrUWpxRi1TWHJzY2djNWVodGZPaFgyY09HQ1M2bFIyQ3ZDZ1FtRXhVVmRNeGJHUi0zNUNWSENnbUhabW5hRTlxWmxrNjRoR2J1OGIycEVsOGJ1cnpmenc2d3FxdVh6RjlTWmxMZ1NfRXhr?oc=5' target='_blank' rel='noopener noreferrer'>Fredun Pharmaceuticals Ltd. Share Price rises 10% today - Univest</a> (positive) – 07-Oct-2026 13:24</li><li><a href='https://news.google.com/rss/articles/CBMihgFBVV95cUxNSWgzRkF2QXBSNlQ1N1h4SmNLVXo4UEdldU42ZDFBeW1HZXhRVGxlNVpKNVZuQmp4aEtVTG5Fd0JIa3BWVzYyck5XYVJvVUZ0V3hWaHpFWE1lNWRCRGhaLXExZ1JENFhkc1pyZE1lRnAtOG9HbVJNLUhndG56WWZ1dkpKSW02QQ?oc=5' target='_blank' rel='noopener noreferrer'>Bharat Parenterals Ltd. (BPLPHARMA) Share Price rises 9.58% as stock trades at Rs 1,892.80 - Univest</a> (positive) – 06-Oct-2026 15:44</li><li><a href='https://news.google.com/rss/articles/CBMiZ0FVX3lxTE15eElYWDVhdjlZNWE4S2ZMVklXZHg0d0phaXVpVThYcU1oOG4yUGpubFJ5YlZPeHNiN1VGakMwbTBsN19IZ1FJalhjanhXdGFoMjY2VFZNcHdlWVZ1UVNwMWRsUjZqdTQ?oc=5' target='_blank' rel='noopener noreferrer'>Kotak Healthcare Reg Gr NAV, Mutual Fund Returns &amp; Scheme History - HDFC Sky</a> (neutral) – 06-Oct-2026 12:30</li><li><a href='https://news.google.com/rss/articles/CBMihAFBVV95cUxQMWhud1JTclBhYXRzOXhGd0plbDVPU1hwdVV3ZWtrc3dNSk9ELWRTYkgzVy02SFBkckJ3aUhWVktNcm1adXNEUHNzM0FmZFhGT3Byd2plWkVzcjhOOU1scm1HMEEyd0xXY0JaOE1EM1NHV2h3QXNBVzdJS1JpSDJJblM1MWo?oc=5' target='_blank' rel='noopener noreferrer'>Ipca Laboratories Share Price gains; fundamentals in focus - Univest</a> (positive) – 05-Oct-2026 12:30</li></ul></td></tr></tbody></table></div></div><div style='text-align:right;padding:6px 4px 4px;margin-top:4px;'><a href='#section-4' style='font-size:.78rem;color:var(--text-muted);text-decoration:none;opacity:.7;'>&#8593;&nbsp;Back to top of this section</a></div>
+</div></div>
+
+<div class='disclaimer'>
+  &#9888;&nbsp; Automatically generated for informational purposes only.
+  Validate all signals on your broker or charting platform before acting.
+  Past performance is not indicative of future results.
+</div>
+</div>
+<a href='#top' id='back-top' title='Back to top'>&#8593;</a>
+</body></html>
