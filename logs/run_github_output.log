@@ -1,17 +1,86 @@
 ============================================================
 NIFTY 100 DAILY REPORTER
-Run ID          : 38071687570
+Run ID          : 38140483451
 Workflow        : Nifty 100 Daily Reporter
-GitHub Event    : schedule
-Trigger Source  : github-schedule
+GitHub Event    : workflow_dispatch
+Trigger Source  : cron-job-org
 Automated Run   : true
-Marker File     : logs/automation_markers/2026-10-10.success
+Marker File     : logs/automation_markers/2026-10-11.success
 Branch / Ref    : main
-Run Date (UTC)  : 2026-10-10 17:25:59 UTC
+Run Date (UTC)  : 2026-10-11 12:45:54 UTC
 ============================================================
-SKIP DECISION    : YES
-Reason           : Successful automated run marker already exists for today (logs/automation_markers/2026-10-10.success).
-Requested by     : github-schedule
-Action Taken     : Main Python execution skipped.
-Rule Applied     : Only automated runs block later automated runs on the same day.
+SKIP DECISION    : NO
+Reason           : No automated success marker found for today.
+Execution Source : cron-job-org
+Rule Applied     : Manual runs are always allowed; only automated runs deduplicate each other.
 ============================================================
+2026-10-11 12:45:56,584 | INFO | Nifty 100 Daily EMA Cross Reporter | Version 3.3.8 | Released 2026-04-17
+2026-10-11 12:45:56,585 | INFO | Base directory: /home/runner/work/nifty100-reporter/nifty100-reporter
+2026-10-11 12:45:56,585 | INFO | Loaded config. Email enabled: True | Recipients: 1
+2026-10-11 12:45:56,678 | WARNING | NSE session bootstrap HTTP 403 (attempt 1/5) — refreshing NSE session cookie …
+2026-10-11 12:46:07,120 | INFO | NSE session bootstrap status: 200
+2026-10-11 12:46:07,120 | INFO | Downloading Nifty 100 universe from https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv
+2026-10-11 12:46:07,512 | INFO | Universe download status: 200
+2026-10-11 12:46:07,516 | INFO | Universe rows loaded: 100
+2026-10-11 12:46:07,616 | INFO | Loaded history rows: 137654
+2026-10-11 12:46:07,621 | INFO | yfinance history update: 100 symbols | 2026-10-08 → 2026-10-12
+2026-10-11 12:46:07,621 | INFO | yfinance batch download: 100 symbols | 2026-10-08 → 2026-10-12
+2026-10-11 12:46:07,623 | INFO | Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-10-11 12:46:12,147 | INFO | yfinance raw shape: (2, 500)
+2026-10-11 12:46:12,354 | INFO | yfinance parsed rows after date-filter: 200
+2026-10-11 12:46:12,355 | INFO | New rows from yfinance: 200
+2026-10-11 12:46:12,989 | INFO | Saved history rows: 137654 | file: /home/runner/work/nifty100-reporter/nifty100-reporter/data/nifty100_ohlcv_history.csv
+2026-10-11 12:46:13,077 | INFO | Loaded history rows: 137654
+2026-10-11 12:46:13,078 | INFO | Latest OHLCV data is from 2026-10-09
+2026-10-11 12:46:13,100 | INFO | Latest Delivery data is from 2026-10-09
+2026-10-11 12:46:13,136 | INFO | Delivery cache has 33 dates — skipping backfill.
+2026-10-11 12:46:13,136 | INFO | Delivery fetch attempt [2/7] — URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_09102026.csv
+2026-10-11 12:46:13,867 | INFO | Delivery fetch SUCCESS — date: 2026-10-09 | size: 397318 bytes | URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_09102026.csv
+2026-10-11 12:46:14,171 | INFO | Delivery cache updated: 2675 symbols for 2026-10-09 (rows in cache: 87576)
+2026-10-11 12:46:14,172 | INFO | Delivery data: 2675 symbols | fallback=False
+2026-10-11 12:46:14,426 | INFO | Corporate actions bulk OK: 4 raw rows | 2 Nifty100 symbols with events
+2026-10-11 12:46:43,429 | INFO | Corporate actions: 2/100 symbols have events (window 11-10-2026 to 10-11-2026) | Symbols: TCS, VEDL
+2026-10-11 12:46:43,429 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
+2026-10-11 12:46:43,429 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
+2026-10-11 12:46:43,429 | INFO | Index membership ready: 100 symbols mapped
+2026-10-11 12:46:44,923 | INFO | News RSS query for ADANIPORTS: https://news.google.com/rss/search?q=%22Adani+Ports+and+Special+Economic+Zone+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-11 12:46:45,208 | INFO | News RSS status for ADANIPORTS: 200
+2026-10-11 12:46:46,824 | INFO | News RSS query for AXISBANK: https://news.google.com/rss/search?q=%22Axis+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-11 12:46:47,086 | INFO | News RSS status for AXISBANK: 200
+2026-10-11 12:46:50,178 | WARNING | Skipping BSE — only 9 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:46:52,432 | INFO | News RSS query for DIVISLAB: https://news.google.com/rss/search?q=%22Divi%27s+Laboratories+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-11 12:46:52,633 | INFO | News RSS status for DIVISLAB: 200
+2026-10-11 12:46:52,634 | INFO | News RSS query for DIVISLAB: https://news.google.com/rss/search?q=%22Divi%27s+Laboratories+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-11 12:46:52,844 | INFO | News RSS status for DIVISLAB: 200
+2026-10-11 12:46:58,281 | WARNING | Skipping IDEA — only 9 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:47:01,287 | INFO | News RSS query for KOTAKBANK: https://news.google.com/rss/search?q=%22Kotak+Mahindra+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-11 12:47:01,540 | INFO | News RSS status for KOTAKBANK: 200
+2026-10-11 12:47:02,132 | WARNING | Skipping LTM — only 160 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:47:05,902 | WARNING | Skipping POLYCAB — only 9 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:47:06,213 | WARNING | Skipping POWERINDIA — only 9 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:47:11,737 | INFO | News RSS query for TRENT: https://news.google.com/rss/search?q=%22Trent+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-11 12:47:11,970 | INFO | News RSS status for TRENT: 200
+2026-10-11 12:47:13,027 | WARNING | Skipping VAML — only 15 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:47:13,645 | WARNING | Skipping VEDPOWER — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:47:13,645 | WARNING | Skipping VISL — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:47:13,646 | WARNING | Skipping VOGL — only 7 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-11 12:47:14,266 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
+2026-10-11 12:47:14,266 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
+2026-10-11 12:47:14,266 | INFO | Index membership ready: 100 symbols mapped
+2026-10-11 12:47:14,266 | INFO | Market Health: fetching index OHLCV...
+2026-10-11 12:47:14,269 | INFO | Index OHLCV cache fresh for NIFTY 50 (1480 rows)
+2026-10-11 12:47:14,271 | INFO | Index OHLCV cache fresh for NIFTY NEXT 50 (1474 rows)
+2026-10-11 12:47:14,271 | INFO | Market Health: fetching VIX...
+2026-10-11 12:47:14,272 | INFO | VIX cache fresh (178 rows)
+2026-10-11 12:47:14,272 | INFO | Market Health: updating breadth EMA cache...
+2026-10-11 12:47:15,317 | INFO | Market Health [NIFTY 50]: Score=-35.0 | Weak Bear &#x1F534;
+2026-10-11 12:47:15,331 | INFO | Market Health [Nifty Next 50]: Score=-27.0 | Weak Bear &#x1F534;
+2026-10-11 12:47:15,342 | INFO | Signal log: skipping new signal insertion — 2026-10-11 is a weekend.
+2026-10-11 12:47:15,854 | INFO | Signal tracker: updated 88 Active signal rows.
+2026-10-11 12:47:15,861 | INFO | HTML report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261011.html
+2026-10-11 12:47:15,867 | INFO | Market Health Excel sheet written.
+2026-10-11 12:47:17,031 | INFO | Excel report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261011.xlsx
+2026-10-11 12:47:17,032 | INFO | GitHub Actions detected — skipping Gmail API send (workflow handles email).
+2026-10-11 12:47:17,032 | INFO | Run completed successfully.
+2026-10-11 12:47:17,032 | INFO | Artifacts: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261011.html | /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261011.xlsx | log: /home/runner/work/nifty100-reporter/nifty100-reporter/logs/run_20261011_181556.log
+Created automation marker: logs/automation_markers/2026-10-11.success
