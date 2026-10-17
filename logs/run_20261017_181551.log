@@ -1,0 +1,86 @@
+2026-10-17 12:45:51,830 | INFO | Nifty 100 Daily EMA Cross Reporter | Version 3.3.8 | Released 2026-04-17
+2026-10-17 12:45:51,830 | INFO | Base directory: /home/runner/work/nifty100-reporter/nifty100-reporter
+2026-10-17 12:45:51,830 | INFO | Loaded config. Email enabled: True | Recipients: 1
+2026-10-17 12:45:52,043 | INFO | NSE session bootstrap status: 200
+2026-10-17 12:45:52,044 | INFO | Downloading Nifty 100 universe from https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv
+2026-10-17 12:45:52,412 | INFO | Universe download status: 200
+2026-10-17 12:45:52,416 | INFO | Universe rows loaded: 100
+2026-10-17 12:45:52,508 | INFO | Loaded history rows: 138154
+2026-10-17 12:45:52,513 | INFO | yfinance history update: 100 symbols | 2026-10-15 → 2026-10-18
+2026-10-17 12:45:52,513 | INFO | yfinance batch download: 100 symbols | 2026-10-15 → 2026-10-18
+2026-10-17 12:45:52,514 | INFO | Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-10-17 12:45:56,637 | INFO | yfinance raw shape: (2, 500)
+2026-10-17 12:45:56,845 | INFO | yfinance parsed rows after date-filter: 200
+2026-10-17 12:45:56,846 | INFO | New rows from yfinance: 200
+2026-10-17 12:45:57,472 | INFO | Saved history rows: 138154 | file: /home/runner/work/nifty100-reporter/nifty100-reporter/data/nifty100_ohlcv_history.csv
+2026-10-17 12:45:57,557 | INFO | Loaded history rows: 138154
+2026-10-17 12:45:57,558 | INFO | Latest OHLCV data is from 2026-10-16
+2026-10-17 12:45:57,579 | INFO | Latest Delivery data is from 2026-10-16
+2026-10-17 12:45:57,613 | INFO | Delivery cache has 33 dates — skipping backfill.
+2026-10-17 12:45:57,614 | INFO | Delivery fetch attempt [1/7] — URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_16102026.csv
+2026-10-17 12:45:58,940 | INFO | Delivery fetch SUCCESS — date: 2026-10-16 | size: 397218 bytes | URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_16102026.csv
+2026-10-17 12:45:59,241 | INFO | Delivery cache updated: 2691 symbols for 2026-10-16 (rows in cache: 87863)
+2026-10-17 12:45:59,242 | INFO | Delivery data: 2691 symbols | fallback=False
+2026-10-17 12:45:59,574 | INFO | Corporate actions bulk OK: 5 raw rows | 0 Nifty100 symbols with events
+2026-10-17 12:46:28,643 | INFO | Corporate actions: 0/100 symbols have events (window 17-10-2026 to 16-11-2026) | Symbols: none
+2026-10-17 12:46:28,643 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
+2026-10-17 12:46:28,643 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
+2026-10-17 12:46:28,643 | INFO | Index membership ready: 100 symbols mapped
+2026-10-17 12:46:32,628 | INFO | News RSS query for BAJAJHLDNG: https://news.google.com/rss/search?q=%22Bajaj+Holdings+%26+Investment+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:32,876 | INFO | News RSS status for BAJAJHLDNG: 200
+2026-10-17 12:46:32,879 | INFO | News RSS query for BAJAJHLDNG: https://news.google.com/rss/search?q=%22Bajaj+Holdings+%26+Investment+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:33,182 | INFO | News RSS status for BAJAJHLDNG: 200
+2026-10-17 12:46:34,468 | INFO | News RSS query for BHARTIARTL: https://news.google.com/rss/search?q=%22Bharti+Airtel+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:34,710 | INFO | News RSS status for BHARTIARTL: 200
+2026-10-17 12:46:35,653 | WARNING | Skipping BSE — only 14 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:46:38,197 | INFO | News RSS query for DLF: https://news.google.com/rss/search?q=%22DLF+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:38,430 | INFO | News RSS status for DLF: 200
+2026-10-17 12:46:39,750 | INFO | News RSS query for ETERNAL: https://news.google.com/rss/search?q=%22Eternal+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:39,999 | INFO | News RSS status for ETERNAL: 200
+2026-10-17 12:46:41,280 | INFO | News RSS query for HAL: https://news.google.com/rss/search?q=%22Hindustan+Aeronautics+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:41,508 | INFO | News RSS status for HAL: 200
+2026-10-17 12:46:41,866 | INFO | News RSS query for HCLTECH: https://news.google.com/rss/search?q=%22HCL+Technologies+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:42,105 | INFO | News RSS status for HCLTECH: 200
+2026-10-17 12:46:42,803 | INFO | News RSS query for HDFCBANK: https://news.google.com/rss/search?q=%22HDFC+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:43,064 | INFO | News RSS status for HDFCBANK: 200
+2026-10-17 12:46:44,720 | WARNING | Skipping IDEA — only 14 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:46:47,702 | INFO | News RSS query for KOTAKBANK: https://news.google.com/rss/search?q=%22Kotak+Mahindra+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:47,966 | INFO | News RSS status for KOTAKBANK: 200
+2026-10-17 12:46:48,558 | WARNING | Skipping LTM — only 165 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:46:52,336 | INFO | News RSS query for PNB: https://news.google.com/rss/search?q=%22Punjab+National+Bank%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:52,629 | INFO | News RSS status for PNB: 200
+2026-10-17 12:46:52,634 | WARNING | Skipping POLYCAB — only 14 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:46:52,941 | WARNING | Skipping POWERINDIA — only 14 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:46:55,443 | INFO | News RSS query for SOLARINDS: https://news.google.com/rss/search?q=%22Solar+Industries+India+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:55,685 | INFO | News RSS status for SOLARINDS: 200
+2026-10-17 12:46:57,677 | INFO | News RSS query for TECHM: https://news.google.com/rss/search?q=%22Tech+Mahindra+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:57,970 | INFO | News RSS status for TECHM: 200
+2026-10-17 12:46:58,022 | INFO | News RSS query for TECHM: https://news.google.com/rss/search?q=%22Tech+Mahindra+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:58,026 | INFO | News RSS status for TECHM: 200
+2026-10-17 12:46:58,077 | INFO | News RSS query for TECHM: https://news.google.com/rss/search?q=%22Tech+Mahindra+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-10-17 12:46:58,081 | INFO | News RSS status for TECHM: 200
+2026-10-17 12:47:00,187 | WARNING | Skipping VAML — only 20 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:47:00,803 | WARNING | Skipping VEDPOWER — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:47:00,804 | WARNING | Skipping VISL — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:47:00,804 | WARNING | Skipping VOGL — only 7 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-10-17 12:47:01,424 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
+2026-10-17 12:47:01,424 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
+2026-10-17 12:47:01,424 | INFO | Index membership ready: 100 symbols mapped
+2026-10-17 12:47:01,424 | INFO | Market Health: fetching index OHLCV...
+2026-10-17 12:47:02,602 | WARNING | niftyindices failed NIFTY 50 2026-10-14-2026-10-17: Expecting value: line 1 column 2 (char 1)
+2026-10-17 12:47:02,789 | INFO | Index OHLCV via yfinance (^NSEI) for NIFTY 50: 1485 rows
+2026-10-17 12:47:02,793 | INFO | Index OHLCV cache fresh for NIFTY NEXT 50 (1479 rows)
+2026-10-17 12:47:02,793 | INFO | Market Health: fetching VIX...
+2026-10-17 12:47:04,029 | WARNING | niftyindices VIX failed 2026-10-14-2026-10-17: Expecting value: line 1 column 2 (char 1)
+2026-10-17 12:47:04,185 | INFO | VIX via yfinance (^INDIAVIX): 183 rows
+2026-10-17 12:47:04,185 | INFO | Market Health: updating breadth EMA cache...
+2026-10-17 12:47:05,219 | INFO | Market Health [NIFTY 50]: Score=-13.0 | Sideways &#x1F7E0;
+2026-10-17 12:47:05,233 | INFO | Market Health [Nifty Next 50]: Score=-37.0 | Weak Bear &#x1F534;
+2026-10-17 12:47:05,265 | INFO | Signal log: skipping new signal insertion — 2026-10-17 is a weekend.
+2026-10-17 12:47:05,877 | INFO | Signal tracker: updated 109 Active signal rows.
+2026-10-17 12:47:05,887 | INFO | HTML report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261017.html
+2026-10-17 12:47:05,922 | INFO | Market Health Excel sheet written.
+2026-10-17 12:47:07,104 | INFO | Excel report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261017.xlsx
+2026-10-17 12:47:07,104 | INFO | GitHub Actions detected — skipping Gmail API send (workflow handles email).
+2026-10-17 12:47:07,104 | INFO | Run completed successfully.
+2026-10-17 12:47:07,104 | INFO | Artifacts: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261017.html | /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261017.xlsx | log: /home/runner/work/nifty100-reporter/nifty100-reporter/logs/run_20261017_181551.log
