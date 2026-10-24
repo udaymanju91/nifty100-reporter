@@ -1,28 +1,28 @@
 ============================================================
 NIFTY 100 DAILY REPORTER
-Run ID          : 40095252035
+Run ID          : 40110286315
 Workflow        : Nifty 100 Daily Reporter
-GitHub Event    : workflow_dispatch
-Trigger Source  : cron-job-org
+GitHub Event    : schedule
+Trigger Source  : github-schedule
 Automated Run   : true
 Marker File     : logs/automation_markers/2026-10-24.success
 Branch / Ref    : main
-Run Date (UTC)  : 2026-10-24 12:45:56 UTC
+Run Date (UTC)  : 2026-10-24 16:10:30 UTC
 ============================================================
 SKIP DECISION    : NO
 Reason           : No automated success marker found for today.
-Execution Source : cron-job-org
+Execution Source : github-schedule
 Rule Applied     : Manual runs are always allowed; only automated runs deduplicate each other.
 ============================================================
 /opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.11.17) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2027-10-24). Please upgrade to the latest Python version, or at least Python 3.12, to continue receiving updates for google.api_core past that date.
   warnings.warn(message, FutureWarning)
-2026-10-24 12:45:59,433 | INFO | Nifty 100 Daily EMA Cross Reporter | Version 3.3.8 | Released 2026-04-17
-2026-10-24 12:45:59,434 | INFO | Base directory: /home/runner/work/nifty100-reporter/nifty100-reporter
-2026-10-24 12:45:59,434 | INFO | Loaded config. Email enabled: True | Recipients: 1
-2026-10-24 12:45:59,837 | INFO | NSE session bootstrap status: 200
-2026-10-24 12:45:59,837 | INFO | Downloading Nifty 100 universe from https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv
-2026-10-24 12:46:18,877 | INFO | Universe download status: 404
-2026-10-24 12:46:18,878 | ERROR | Run failed: 404 Client Error: Not Found for url: https://www.niftyindices.com/?ReturnUrl=https%3A%2F%2Fwww.niftyindices.com%2F%3FReturnUrl%3Dhttps%253A%252F%252Fwww.niftyindices.com%252F%253FReturnUrl%253Dhttps%25253A%25252F%25252Fwww.niftyindices.com%25252F%25253FReturnUrl%25253Dhttps%2525253A%2525252F%2525252Fwww.niftyindices.com%2525252F%2525253FReturnUrl%2525253Dhttps%252525253A%252525252F%252525252Fwww.niftyindices.com%252525252F%252525253FReturnUrl%252525253Dhttps%25252525253A%25252525252F%25252525252Fwww.niftyindices.com%25252525252F%25252525253FReturnUrl%25252525253Dhttps%2525252525253A%2525252525252F%2525252525252Fwww.niftyindices.com%2525252525252F%2525252525253FReturnUrl%2525252525253Dhttps%252525252525253A%252525252525252F%252525252525252Fwww.niftyindices.com%252525252525252F%252525252525253FReturnUrl%252525252525253Dhttps%25252525252525253A%25252525252525252F%25252525252525252Fwww.niftyindices.com%25252525252525252F%25252525252525253FReturnUrl%25252525252525253Dhttps%2525252525252525253A%2525252525252525252F%2525252525252525252Fwww.niftyindices.com%2525252525252525252FIndexConstituent%2525252525252525252Find_nifty100list.csv
+2026-10-24 16:10:31,779 | INFO | Nifty 100 Daily EMA Cross Reporter | Version 3.3.8 | Released 2026-04-17
+2026-10-24 16:10:31,780 | INFO | Base directory: /home/runner/work/nifty100-reporter/nifty100-reporter
+2026-10-24 16:10:31,780 | INFO | Loaded config. Email enabled: True | Recipients: 1
+2026-10-24 16:10:32,033 | INFO | NSE session bootstrap status: 200
+2026-10-24 16:10:32,033 | INFO | Downloading Nifty 100 universe from https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv
+2026-10-24 16:10:34,243 | INFO | Universe download status: 502
+2026-10-24 16:10:34,243 | ERROR | Run failed: 502 Server Error: Bad Gateway for url: https://www.niftyindices.com/sitefinity/status?ReturnUrl=https%3a%2f%2fwww.niftyindices.com%2f%3fReturnUrl%3dhttps%253A%252F%252Fwww.niftyindices.com%252FIndexConstituent%252Find_nifty100list.csv
 Traceback (most recent call last):
   File "/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py", line 6707, in <module>
     main()
@@ -33,7 +33,7 @@ Traceback (most recent call last):
     r.raise_for_status()
   File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/requests/models.py", line 1167, in raise_for_status
     raise HTTPError(http_error_msg, response=self)
-requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://www.niftyindices.com/?ReturnUrl=https%3A%2F%2Fwww.niftyindices.com%2F%3FReturnUrl%3Dhttps%253A%252F%252Fwww.niftyindices.com%252F%253FReturnUrl%253Dhttps%25253A%25252F%25252Fwww.niftyindices.com%25252F%25253FReturnUrl%25253Dhttps%2525253A%2525252F%2525252Fwww.niftyindices.com%2525252F%2525253FReturnUrl%2525253Dhttps%252525253A%252525252F%252525252Fwww.niftyindices.com%252525252F%252525253FReturnUrl%252525253Dhttps%25252525253A%25252525252F%25252525252Fwww.niftyindices.com%25252525252F%25252525253FReturnUrl%25252525253Dhttps%2525252525253A%2525252525252F%2525252525252Fwww.niftyindices.com%2525252525252F%2525252525253FReturnUrl%2525252525253Dhttps%252525252525253A%252525252525252F%252525252525252Fwww.niftyindices.com%252525252525252F%252525252525253FReturnUrl%252525252525253Dhttps%25252525252525253A%25252525252525252F%25252525252525252Fwww.niftyindices.com%25252525252525252F%25252525252525253FReturnUrl%25252525252525253Dhttps%2525252525252525253A%2525252525252525252F%2525252525252525252Fwww.niftyindices.com%2525252525252525252FIndexConstituent%2525252525252525252Find_nifty100list.csv
+requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://www.niftyindices.com/sitefinity/status?ReturnUrl=https%3a%2f%2fwww.niftyindices.com%2f%3fReturnUrl%3dhttps%253A%252F%252Fwww.niftyindices.com%252FIndexConstituent%252Find_nifty100list.csv
 
-ERROR: 404 Client Error: Not Found for url: https://www.niftyindices.com/?ReturnUrl=https%3A%2F%2Fwww.niftyindices.com%2F%3FReturnUrl%3Dhttps%253A%252F%252Fwww.niftyindices.com%252F%253FReturnUrl%253Dhttps%25253A%25252F%25252Fwww.niftyindices.com%25252F%25253FReturnUrl%25253Dhttps%2525253A%2525252F%2525252Fwww.niftyindices.com%2525252F%2525253FReturnUrl%2525253Dhttps%252525253A%252525252F%252525252Fwww.niftyindices.com%252525252F%252525253FReturnUrl%252525253Dhttps%25252525253A%25252525252F%25252525252Fwww.niftyindices.com%25252525252F%25252525253FReturnUrl%25252525253Dhttps%2525252525253A%2525252525252F%2525252525252Fwww.niftyindices.com%2525252525252F%2525252525253FReturnUrl%2525252525253Dhttps%252525252525253A%252525252525252F%252525252525252Fwww.niftyindices.com%252525252525252F%252525252525253FReturnUrl%252525252525253Dhttps%25252525252525253A%25252525252525252F%25252525252525252Fwww.niftyindices.com%25252525252525252F%25252525252525253FReturnUrl%25252525252525253Dhttps%2525252525252525253A%2525252525252525252F%2525252525252525252Fwww.niftyindices.com%2525252525252525252FIndexConstituent%2525252525252525252Find_nifty100list.csv
-Check log file: /home/runner/work/nifty100-reporter/nifty100-reporter/logs/run_20261024_181559.log
+ERROR: 502 Server Error: Bad Gateway for url: https://www.niftyindices.com/sitefinity/status?ReturnUrl=https%3a%2f%2fwww.niftyindices.com%2f%3fReturnUrl%3dhttps%253A%252F%252Fwww.niftyindices.com%252FIndexConstituent%252Find_nifty100list.csv
+Check log file: /home/runner/work/nifty100-reporter/nifty100-reporter/logs/run_20261024_214031.log

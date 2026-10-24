@@ -1,0 +1,18 @@
+2026-10-24 16:10:31,779 | INFO | Nifty 100 Daily EMA Cross Reporter | Version 3.3.8 | Released 2026-04-17
+2026-10-24 16:10:31,780 | INFO | Base directory: /home/runner/work/nifty100-reporter/nifty100-reporter
+2026-10-24 16:10:31,780 | INFO | Loaded config. Email enabled: True | Recipients: 1
+2026-10-24 16:10:32,033 | INFO | NSE session bootstrap status: 200
+2026-10-24 16:10:32,033 | INFO | Downloading Nifty 100 universe from https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv
+2026-10-24 16:10:34,243 | INFO | Universe download status: 502
+2026-10-24 16:10:34,243 | ERROR | Run failed: 502 Server Error: Bad Gateway for url: https://www.niftyindices.com/sitefinity/status?ReturnUrl=https%3a%2f%2fwww.niftyindices.com%2f%3fReturnUrl%3dhttps%253A%252F%252Fwww.niftyindices.com%252FIndexConstituent%252Find_nifty100list.csv
+Traceback (most recent call last):
+  File "/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py", line 6707, in <module>
+    main()
+  File "/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py", line 6630, in main
+    universe = fetch_universe(s)
+               ^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py", line 583, in fetch_universe
+    r.raise_for_status()
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: https://www.niftyindices.com/sitefinity/status?ReturnUrl=https%3a%2f%2fwww.niftyindices.com%2f%3fReturnUrl%3dhttps%253A%252F%252Fwww.niftyindices.com%252FIndexConstituent%252Find_nifty100list.csv
