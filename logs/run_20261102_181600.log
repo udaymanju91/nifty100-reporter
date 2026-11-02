@@ -1,0 +1,105 @@
+2026-11-02 12:46:00,758 | INFO | Nifty 100 Daily EMA Cross Reporter | Version 3.3.8 | Released 2026-04-17
+2026-11-02 12:46:00,758 | INFO | Base directory: /home/runner/work/nifty100-reporter/nifty100-reporter
+2026-11-02 12:46:00,759 | INFO | Loaded config. Email enabled: True | Recipients: 1
+2026-11-02 12:46:01,296 | INFO | NSE session bootstrap status: 200
+2026-11-02 12:46:01,296 | INFO | Downloading Nifty 100 universe from https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv
+2026-11-02 12:46:01,943 | INFO | Universe download status: 200
+2026-11-02 12:46:01,947 | INFO | Universe rows loaded: 100
+2026-11-02 12:46:02,000 | INFO | Loaded history rows: 139054
+2026-11-02 12:46:02,002 | INFO | yfinance history update: 100 symbols | 2026-10-29 → 2026-11-03
+2026-11-02 12:46:02,002 | INFO | yfinance batch download: 100 symbols | 2026-10-29 → 2026-11-03
+2026-11-02 12:46:11,203 | INFO | yfinance raw shape: (3, 500)
+2026-11-02 12:46:11,453 | INFO | yfinance parsed rows after date-filter: 300
+2026-11-02 12:46:11,455 | INFO | New rows from yfinance: 300
+2026-11-02 12:46:12,344 | INFO | Saved history rows: 139154 | file: /home/runner/work/nifty100-reporter/nifty100-reporter/data/nifty100_ohlcv_history.csv
+2026-11-02 12:46:12,397 | INFO | Loaded history rows: 139154
+2026-11-02 12:46:12,398 | INFO | Latest OHLCV data is from 2026-11-02
+2026-11-02 12:46:12,411 | INFO | Latest Delivery data is from 2026-10-30
+2026-11-02 12:46:12,445 | INFO | Delivery cache has 33 dates — skipping backfill.
+2026-11-02 12:46:12,445 | INFO | Delivery fetch attempt [0/7] — URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_02112026.csv
+2026-11-02 12:46:14,638 | INFO | Delivery fetch SUCCESS — date: 2026-11-02 | size: 401284 bytes | URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_02112026.csv
+2026-11-02 12:46:14,995 | INFO | Delivery cache updated: 2714 symbols for 2026-11-02 (rows in cache: 85902)
+2026-11-02 12:46:14,996 | INFO | Delivery data: 2714 symbols | fallback=False
+2026-11-02 12:46:15,390 | INFO | Corporate actions bulk OK: 44 raw rows | 9 Nifty100 symbols with events
+2026-11-02 12:46:46,776 | INFO | Corporate actions: 9/100 symbols have events (window 02-11-2026 to 02-12-2026) | Symbols: ASIANPAINT, COALINDIA, GODREJCP, HINDUNILVR, INFY, MAZDOCK, NTPC, POWERGRID, VBL
+2026-11-02 12:46:46,777 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
+2026-11-02 12:46:46,777 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
+2026-11-02 12:46:46,777 | INFO | Index membership ready: 100 symbols mapped
+2026-11-02 12:46:47,562 | INFO | News RSS query for ADANIENSOL: https://news.google.com/rss/search?q=%22Adani+Energy+Solutions+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:46:47,827 | INFO | News RSS status for ADANIENSOL: 200
+2026-11-02 12:46:48,881 | INFO | News RSS query for ADANIGREEN: https://news.google.com/rss/search?q=%22Adani+Green+Energy+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:46:49,108 | INFO | News RSS status for ADANIGREEN: 200
+2026-11-02 12:46:49,630 | INFO | News RSS query for ADANIPORTS: https://news.google.com/rss/search?q=%22Adani+Ports+and+Special+Economic+Zone+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:46:49,828 | INFO | News RSS status for ADANIPORTS: 200
+2026-11-02 12:46:51,289 | INFO | News RSS query for APOLLOHOSP: https://news.google.com/rss/search?q=%22Apollo+Hospitals+Enterprise+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:46:51,463 | INFO | News RSS status for APOLLOHOSP: 200
+2026-11-02 12:46:56,211 | INFO | News RSS query for BOSCHLTD: https://news.google.com/rss/search?q=%22Bosch+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:46:56,453 | INFO | News RSS status for BOSCHLTD: 200
+2026-11-02 12:46:57,395 | WARNING | Skipping BSE — only 24 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:00,775 | INFO | News RSS query for DIVISLAB: https://news.google.com/rss/search?q=%22Divi%27s+Laboratories+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:00,951 | INFO | News RSS status for DIVISLAB: 200
+2026-11-02 12:47:00,953 | INFO | News RSS query for DIVISLAB: https://news.google.com/rss/search?q=%22Divi%27s+Laboratories+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:01,142 | INFO | News RSS status for DIVISLAB: 200
+2026-11-02 12:47:01,664 | INFO | News RSS query for DLF: https://news.google.com/rss/search?q=%22DLF+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:01,845 | INFO | News RSS status for DLF: 200
+2026-11-02 12:47:01,848 | INFO | News RSS query for DLF: https://news.google.com/rss/search?q=%22DLF+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:02,017 | INFO | News RSS status for DLF: 200
+2026-11-02 12:47:04,016 | INFO | News RSS query for ETERNAL: https://news.google.com/rss/search?q=%22Eternal+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:04,191 | INFO | News RSS status for ETERNAL: 200
+2026-11-02 12:47:04,708 | INFO | News RSS query for GAIL: https://news.google.com/rss/search?q=%22GAIL+%28India%29+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:04,888 | INFO | News RSS status for GAIL: 200
+2026-11-02 12:47:06,344 | INFO | News RSS query for HAL: https://news.google.com/rss/search?q=%22Hindustan+Aeronautics+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:06,542 | INFO | News RSS status for HAL: 200
+2026-11-02 12:47:10,573 | INFO | News RSS query for ICICIBANK: https://news.google.com/rss/search?q=%22ICICI+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:10,790 | INFO | News RSS status for ICICIBANK: 200
+2026-11-02 12:47:10,795 | WARNING | Skipping IDEA — only 24 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:12,718 | INFO | News RSS query for IOC: https://news.google.com/rss/search?q=%22Indian+Oil+Corporation+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:12,882 | INFO | News RSS status for IOC: 200
+2026-11-02 12:47:13,859 | INFO | News RSS query for ITC: https://news.google.com/rss/search?q=%22ITC+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:14,099 | INFO | News RSS status for ITC: 200
+2026-11-02 12:47:15,822 | INFO | News RSS query for KOTAKBANK: https://news.google.com/rss/search?q=%22Kotak+Mahindra+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:16,003 | INFO | News RSS status for KOTAKBANK: 200
+2026-11-02 12:47:16,898 | WARNING | Skipping LTM — only 175 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:21,239 | INFO | News RSS query for ONGC: https://news.google.com/rss/search?q=%22Oil+%26+Natural+Gas+Corporation+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:21,399 | INFO | News RSS status for ONGC: 200
+2026-11-02 12:47:21,402 | INFO | News RSS query for ONGC: https://news.google.com/rss/search?q=%22Oil+%26+Natural+Gas+Corporation+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:21,568 | INFO | News RSS status for ONGC: 200
+2026-11-02 12:47:23,028 | INFO | News RSS query for PNB: https://news.google.com/rss/search?q=%22Punjab+National+Bank%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:23,243 | INFO | News RSS status for PNB: 200
+2026-11-02 12:47:23,248 | WARNING | Skipping POLYCAB — only 24 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:23,716 | WARNING | Skipping POWERINDIA — only 24 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:24,686 | INFO | News RSS query for RELIANCE: https://news.google.com/rss/search?q=%22Reliance+Industries+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:24,963 | INFO | News RSS status for RELIANCE: 200
+2026-11-02 12:47:30,779 | INFO | News RSS query for TECHM: https://news.google.com/rss/search?q=%22Tech+Mahindra+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:30,965 | INFO | News RSS status for TECHM: 200
+2026-11-02 12:47:33,081 | INFO | News RSS query for TVSMOTOR: https://news.google.com/rss/search?q=%22TVS+Motor+Company+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:33,276 | INFO | News RSS status for TVSMOTOR: 200
+2026-11-02 12:47:34,274 | INFO | News RSS query for UNIONBANK: https://news.google.com/rss/search?q=%22Union+Bank+of+India%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:34,509 | INFO | News RSS status for UNIONBANK: 200
+2026-11-02 12:47:34,701 | WARNING | Skipping VAML — only 30 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:35,637 | WARNING | Skipping VEDPOWER — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:35,637 | WARNING | Skipping VISL — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:35,638 | WARNING | Skipping VOGL — only 7 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-02 12:47:36,626 | INFO | News RSS query for ZYDUSLIFE: https://news.google.com/rss/search?q=%22Zydus+Lifesciences+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-02 12:47:36,799 | INFO | News RSS status for ZYDUSLIFE: 200
+2026-11-02 12:47:36,808 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
+2026-11-02 12:47:36,808 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
+2026-11-02 12:47:36,808 | INFO | Index membership ready: 100 symbols mapped
+2026-11-02 12:47:36,808 | INFO | Market Health: fetching index OHLCV...
+2026-11-02 12:47:36,810 | INFO | Index OHLCV cache fresh for NIFTY 50 (1494 rows)
+2026-11-02 12:47:36,812 | INFO | Index OHLCV cache fresh for NIFTY NEXT 50 (1488 rows)
+2026-11-02 12:47:36,812 | INFO | Market Health: fetching VIX...
+2026-11-02 12:47:36,813 | INFO | VIX cache fresh (192 rows)
+2026-11-02 12:47:36,813 | INFO | Market Health: updating breadth EMA cache...
+2026-11-02 12:47:38,463 | INFO | Breadth EMA cache: 138854 total rows (+95)
+2026-11-02 12:47:38,484 | INFO | Market Health [NIFTY 50]: Score=7.0 | Sideways &#x1F7E0;
+2026-11-02 12:47:38,501 | INFO | Market Health [Nifty Next 50]: Score=-30.0 | Weak Bear &#x1F534;
+2026-11-02 12:47:38,616 | INFO | Signal log: appended 8 new signals. Total rows: 908
+2026-11-02 12:47:38,616 | INFO | Signal log written/updated: /home/runner/work/nifty100-reporter/nifty100-reporter/data/nifty100_signal_log.csv
+2026-11-02 12:47:39,267 | INFO | Signal tracker: updated 106 Active signal rows.
+2026-11-02 12:47:39,276 | INFO | HTML report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261102.html
+2026-11-02 12:47:39,284 | INFO | Market Health Excel sheet written.
+2026-11-02 12:47:40,769 | INFO | Excel report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261102.xlsx
+2026-11-02 12:47:40,769 | INFO | GitHub Actions detected — skipping Gmail API send (workflow handles email).
+2026-11-02 12:47:40,769 | INFO | Run completed successfully.
+2026-11-02 12:47:40,769 | INFO | Artifacts: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261102.html | /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261102.xlsx | log: /home/runner/work/nifty100-reporter/nifty100-reporter/logs/run_20261102_181600.log
