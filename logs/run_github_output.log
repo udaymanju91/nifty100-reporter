@@ -1,17 +1,17 @@
 ============================================================
 NIFTY 100 DAILY REPORTER
-Run ID          : 45396607862
+Run ID          : 45503162661
 Workflow        : Nifty 100 Daily Reporter
-GitHub Event    : workflow_dispatch
-Trigger Source  : cron-job-org
+GitHub Event    : schedule
+Trigger Source  : github-schedule
 Automated Run   : true
 Marker File     : logs/automation_markers/2026-11-24.success
 Branch / Ref    : main
-Run Date (UTC)  : 2026-11-24 12:45:58 UTC
+Run Date (UTC)  : 2026-11-24 22:41:10 UTC
 ============================================================
 SKIP DECISION    : YES
 Reason           : Successful automated run marker already exists for today (logs/automation_markers/2026-11-24.success).
-Requested by     : cron-job-org
+Requested by     : github-schedule
 Action Taken     : Main Python execution skipped.
 Rule Applied     : Only automated runs block later automated runs on the same day.
 ============================================================
