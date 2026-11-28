@@ -1,17 +1,207 @@
 ============================================================
 NIFTY 100 DAILY REPORTER
-Run ID          : 46071013904
+Run ID          : 46146238305
 Workflow        : Nifty 100 Daily Reporter
-GitHub Event    : schedule
-Trigger Source  : github-schedule
+GitHub Event    : workflow_dispatch
+Trigger Source  : cron-job-org
 Automated Run   : true
-Marker File     : logs/automation_markers/2026-11-27.success
+Marker File     : logs/automation_markers/2026-11-28.success
 Branch / Ref    : main
-Run Date (UTC)  : 2026-11-27 21:33:23 UTC
+Run Date (UTC)  : 2026-11-28 12:45:55 UTC
 ============================================================
-SKIP DECISION    : YES
-Reason           : Successful automated run marker already exists for today (logs/automation_markers/2026-11-27.success).
-Requested by     : github-schedule
-Action Taken     : Main Python execution skipped.
-Rule Applied     : Only automated runs block later automated runs on the same day.
+SKIP DECISION    : NO
+Reason           : No automated success marker found for today.
+Execution Source : cron-job-org
+Rule Applied     : Manual runs are always allowed; only automated runs deduplicate each other.
 ============================================================
+2026-11-28 12:45:56,479 | INFO | Nifty 100 Daily EMA Cross Reporter | Version 3.3.8 | Released 2026-04-17
+2026-11-28 12:45:56,479 | INFO | Base directory: /home/runner/work/nifty100-reporter/nifty100-reporter
+2026-11-28 12:45:56,479 | INFO | Loaded config. Email enabled: True | Recipients: 1
+2026-11-28 12:45:56,558 | WARNING | NSE session bootstrap HTTP 403 (attempt 1/5) — refreshing NSE session cookie …
+2026-11-28 12:46:06,723 | WARNING | NSE session bootstrap HTTP 403 (attempt 2/5) — refreshing NSE session cookie …
+2026-11-28 12:46:16,883 | WARNING | NSE session bootstrap HTTP 403 (attempt 3/5) — refreshing NSE session cookie …
+2026-11-28 12:46:27,020 | WARNING | NSE session bootstrap HTTP 403 (attempt 4/5) — refreshing NSE session cookie …
+2026-11-28 12:46:37,223 | INFO | NSE session bootstrap status: 403
+2026-11-28 12:46:37,224 | INFO | Downloading Nifty 100 universe from https://www.niftyindices.com/IndexConstituent/ind_nifty100list.csv
+2026-11-28 12:46:37,762 | INFO | Universe download status: 200
+2026-11-28 12:46:37,765 | INFO | Universe rows loaded: 100
+2026-11-28 12:46:37,803 | INFO | Loaded history rows: 140953
+2026-11-28 12:46:37,804 | INFO | yfinance history update: 100 symbols | 2026-11-26 → 2026-11-29
+2026-11-28 12:46:37,804 | INFO | yfinance batch download: 100 symbols | 2026-11-26 → 2026-11-29
+2026-11-28 12:46:37,806 | INFO | Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-11-28 12:46:42,347 | INFO | yfinance raw shape: (2, 500)
+2026-11-28 12:46:42,493 | INFO | yfinance parsed rows after date-filter: 200
+2026-11-28 12:46:42,494 | INFO | New rows from yfinance: 200
+2026-11-28 12:46:43,026 | INFO | Saved history rows: 140953 | file: /home/runner/work/nifty100-reporter/nifty100-reporter/data/nifty100_ohlcv_history.csv
+2026-11-28 12:46:43,060 | INFO | Loaded history rows: 140953
+2026-11-28 12:46:43,060 | INFO | Latest OHLCV data is from 2026-11-27
+2026-11-28 12:46:43,069 | INFO | Latest Delivery data is from 2026-11-27
+2026-11-28 12:46:43,088 | INFO | Delivery cache has 33 dates — skipping backfill.
+2026-11-28 12:46:43,088 | INFO | Delivery fetch attempt [1/7] — URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_27112026.csv
+2026-11-28 12:46:45,072 | INFO | Delivery fetch SUCCESS — date: 2026-11-27 | size: 403571 bytes | URL: https://archives.nseindia.com/products/content/sec_bhavdata_full_27112026.csv
+/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py:880: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  df_raw.rename(columns=rename, inplace=True)
+2026-11-28 12:46:45,315 | INFO | Delivery cache updated: 2783 symbols for 2026-11-27 (rows in cache: 90114)
+2026-11-28 12:46:45,316 | INFO | Delivery data: 2783 symbols | fallback=False
+2026-11-28 12:46:45,969 | INFO | Corporate actions bulk OK: 3 raw rows | 1 Nifty100 symbols with events
+2026-11-28 12:47:25,181 | INFO | Corporate actions: 1/100 symbols have events (window 28-11-2026 to 28-12-2026) | Symbols: TECHM
+2026-11-28 12:47:25,182 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
+2026-11-28 12:47:25,182 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
+2026-11-28 12:47:25,182 | INFO | Index membership ready: 100 symbols mapped
+2026-11-28 12:47:25,618 | INFO | News RSS query for ADANIENSOL: https://news.google.com/rss/search?q=%22Adani+Energy+Solutions+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:25,924 | INFO | News RSS status for ADANIENSOL: 200
+2026-11-28 12:47:26,550 | INFO | News RSS query for ADANIGREEN: https://news.google.com/rss/search?q=%22Adani+Green+Energy+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:26,749 | INFO | News RSS status for ADANIGREEN: 200
+2026-11-28 12:47:27,036 | INFO | News RSS query for ADANIPORTS: https://news.google.com/rss/search?q=%22Adani+Ports+and+Special+Economic+Zone+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:27,271 | INFO | News RSS status for ADANIPORTS: 200
+2026-11-28 12:47:27,564 | INFO | News RSS query for ADANIPOWER: https://news.google.com/rss/search?q=%22Adani+Power+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:27,759 | INFO | News RSS status for ADANIPOWER: 200
+2026-11-28 12:47:28,331 | INFO | News RSS query for APOLLOHOSP: https://news.google.com/rss/search?q=%22Apollo+Hospitals+Enterprise+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:28,572 | INFO | News RSS status for APOLLOHOSP: 200
+2026-11-28 12:47:29,153 | INFO | News RSS query for AXISBANK: https://news.google.com/rss/search?q=%22Axis+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:29,373 | INFO | News RSS status for AXISBANK: 200
+2026-11-28 12:47:30,167 | INFO | News RSS query for BAJAJHLDNG: https://news.google.com/rss/search?q=%22Bajaj+Holdings+%26+Investment+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:30,394 | INFO | News RSS status for BAJAJHLDNG: 200
+2026-11-28 12:47:30,672 | INFO | News RSS query for BAJFINANCE: https://news.google.com/rss/search?q=%22Bajaj+Finance+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:30,919 | INFO | News RSS status for BAJFINANCE: 200
+2026-11-28 12:47:31,719 | INFO | News RSS query for BHARTIARTL: https://news.google.com/rss/search?q=%22Bharti+Airtel+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:31,950 | INFO | News RSS status for BHARTIARTL: 200
+2026-11-28 12:47:32,228 | INFO | News RSS query for BOSCHLTD: https://news.google.com/rss/search?q=%22Bosch+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:32,491 | INFO | News RSS status for BOSCHLTD: 200
+2026-11-28 12:47:33,006 | WARNING | Skipping BSE — only 42 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:47:33,831 | INFO | News RSS query for CHOLAFIN: https://news.google.com/rss/search?q=%22Cholamandalam+Investment+and+Finance+Company+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:34,030 | INFO | News RSS status for CHOLAFIN: 200
+2026-11-28 12:47:35,056 | INFO | News RSS query for DIVISLAB: https://news.google.com/rss/search?q=%22Divi%27s+Laboratories+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:35,254 | INFO | News RSS status for DIVISLAB: 200
+2026-11-28 12:47:35,256 | INFO | News RSS query for DIVISLAB: https://news.google.com/rss/search?q=%22Divi%27s+Laboratories+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:35,460 | INFO | News RSS status for DIVISLAB: 200
+2026-11-28 12:47:35,727 | INFO | News RSS query for DLF: https://news.google.com/rss/search?q=%22DLF+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:35,973 | INFO | News RSS status for DLF: 200
+2026-11-28 12:47:36,490 | INFO | News RSS query for DRREDDY: https://news.google.com/rss/search?q=%22Dr.+Reddy%27s+Laboratories+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:36,735 | INFO | News RSS status for DRREDDY: 200
+2026-11-28 12:47:37,010 | INFO | News RSS query for EICHERMOT: https://news.google.com/rss/search?q=%22Eicher+Motors+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:37,247 | INFO | News RSS status for EICHERMOT: 200
+2026-11-28 12:47:37,549 | INFO | News RSS query for ETERNAL: https://news.google.com/rss/search?q=%22Eternal+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:37,755 | INFO | News RSS status for ETERNAL: 200
+2026-11-28 12:47:38,032 | INFO | News RSS query for GAIL: https://news.google.com/rss/search?q=%22GAIL+%28India%29+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:38,253 | INFO | News RSS status for GAIL: 200
+2026-11-28 12:47:38,255 | INFO | News RSS query for GAIL: https://news.google.com/rss/search?q=%22GAIL+%28India%29+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:38,469 | INFO | News RSS status for GAIL: 200
+2026-11-28 12:47:38,994 | INFO | News RSS query for GRASIM: https://news.google.com/rss/search?q=%22Grasim+Industries+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:39,244 | INFO | News RSS status for GRASIM: 200
+2026-11-28 12:47:39,246 | INFO | News RSS query for GRASIM: https://news.google.com/rss/search?q=%22Grasim+Industries+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:39,440 | INFO | News RSS status for GRASIM: 200
+2026-11-28 12:47:39,725 | INFO | News RSS query for HAL: https://news.google.com/rss/search?q=%22Hindustan+Aeronautics+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:39,942 | INFO | News RSS status for HAL: 200
+2026-11-28 12:47:39,972 | INFO | News RSS query for HAL: https://news.google.com/rss/search?q=%22Hindustan+Aeronautics+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:40,000 | INFO | News RSS status for HAL: 200
+2026-11-28 12:47:40,030 | INFO | News RSS query for HAL: https://news.google.com/rss/search?q=%22Hindustan+Aeronautics+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:40,057 | INFO | News RSS status for HAL: 200
+2026-11-28 12:47:40,336 | INFO | News RSS query for HCLTECH: https://news.google.com/rss/search?q=%22HCL+Technologies+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:40,531 | INFO | News RSS status for HCLTECH: 200
+2026-11-28 12:47:42,218 | INFO | News RSS query for HYUNDAI: https://news.google.com/rss/search?q=%22Hyundai+Motor+India+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:42,463 | INFO | News RSS status for HYUNDAI: 200
+2026-11-28 12:47:42,740 | INFO | News RSS query for ICICIBANK: https://news.google.com/rss/search?q=%22ICICI+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:43,014 | INFO | News RSS status for ICICIBANK: 200
+2026-11-28 12:47:43,018 | WARNING | Skipping IDEA — only 42 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:47:43,522 | INFO | News RSS query for INDIGO: https://news.google.com/rss/search?q=%22InterGlobe+Aviation+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:43,743 | INFO | News RSS status for INDIGO: 200
+2026-11-28 12:47:43,745 | INFO | News RSS query for INDIGO: https://news.google.com/rss/search?q=%22InterGlobe+Aviation+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:43,942 | INFO | News RSS status for INDIGO: 200
+2026-11-28 12:47:45,135 | INFO | News RSS query for JINDALSTEL: https://news.google.com/rss/search?q=%22Jindal+Steel+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:45,325 | INFO | News RSS status for JINDALSTEL: 200
+2026-11-28 12:47:45,327 | INFO | News RSS query for JINDALSTEL: https://news.google.com/rss/search?q=%22Jindal+Steel+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:45,544 | INFO | News RSS status for JINDALSTEL: 200
+2026-11-28 12:47:45,948 | INFO | News RSS query for JSWSTEEL: https://news.google.com/rss/search?q=%22JSW+Steel+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:46,177 | INFO | News RSS status for JSWSTEEL: 200
+2026-11-28 12:47:46,456 | INFO | News RSS query for KOTAKBANK: https://news.google.com/rss/search?q=%22Kotak+Mahindra+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:46,698 | INFO | News RSS status for KOTAKBANK: 200
+2026-11-28 12:47:46,731 | INFO | News RSS query for KOTAKBANK: https://news.google.com/rss/search?q=%22Kotak+Mahindra+Bank+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:46,758 | INFO | News RSS status for KOTAKBANK: 200
+2026-11-28 12:47:47,276 | INFO | News RSS query for LT: https://news.google.com/rss/search?q=%22Larsen+%26+Toubro+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:47,474 | INFO | News RSS status for LT: 200
+2026-11-28 12:47:47,477 | WARNING | Skipping LTM — only 193 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:47:48,822 | INFO | News RSS query for MOTHERSON: https://news.google.com/rss/search?q=%22Samvardhana+Motherson+International+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:49,033 | INFO | News RSS status for MOTHERSON: 200
+2026-11-28 12:47:50,582 | INFO | News RSS query for PIDILITIND: https://news.google.com/rss/search?q=%22Pidilite+Industries+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:50,798 | INFO | News RSS status for PIDILITIND: 200
+2026-11-28 12:47:50,800 | INFO | News RSS query for PIDILITIND: https://news.google.com/rss/search?q=%22Pidilite+Industries+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:51,001 | INFO | News RSS status for PIDILITIND: 200
+2026-11-28 12:47:51,002 | INFO | News RSS query for PIDILITIND: https://news.google.com/rss/search?q=PIDILITIND+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:51,196 | INFO | News RSS status for PIDILITIND: 200
+2026-11-28 12:47:51,462 | INFO | News RSS query for PNB: https://news.google.com/rss/search?q=%22Punjab+National+Bank%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:51,863 | INFO | News RSS status for PNB: 200
+2026-11-28 12:47:51,868 | WARNING | Skipping POLYCAB — only 42 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:47:52,102 | WARNING | Skipping POWERINDIA — only 42 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:47:53,074 | INFO | News RSS query for SBIN: https://news.google.com/rss/search?q=%22State+Bank+of+India%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:53,312 | INFO | News RSS status for SBIN: 200
+2026-11-28 12:47:54,613 | INFO | News RSS query for SUNPHARMA: https://news.google.com/rss/search?q=%22Sun+Pharmaceutical+Industries+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:54,800 | INFO | News RSS status for SUNPHARMA: 200
+2026-11-28 12:47:54,882 | INFO | News RSS query for TATACAP: https://news.google.com/rss/search?q=%22Tata+Capital+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:55,081 | INFO | News RSS status for TATACAP: 200
+2026-11-28 12:47:55,082 | INFO | News RSS query for TATACAP: https://news.google.com/rss/search?q=%22Tata+Capital+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:55,292 | INFO | News RSS status for TATACAP: 200
+2026-11-28 12:47:56,823 | INFO | News RSS query for TITAN: https://news.google.com/rss/search?q=%22Titan+Company+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:57,022 | INFO | News RSS status for TITAN: 200
+2026-11-28 12:47:57,102 | INFO | News RSS query for TMCV: https://news.google.com/rss/search?q=%22Tata+Motors+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:57,316 | INFO | News RSS status for TMCV: 200
+2026-11-28 12:47:57,650 | INFO | News RSS query for TORNTPHARM: https://news.google.com/rss/search?q=%22Torrent+Pharmaceuticals+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:57,860 | INFO | News RSS status for TORNTPHARM: 200
+2026-11-28 12:47:57,862 | INFO | News RSS query for TORNTPHARM: https://news.google.com/rss/search?q=%22Torrent+Pharmaceuticals+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:58,064 | INFO | News RSS status for TORNTPHARM: 200
+2026-11-28 12:47:58,095 | INFO | News RSS query for TORNTPHARM: https://news.google.com/rss/search?q=%22Torrent+Pharmaceuticals+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:58,121 | INFO | News RSS status for TORNTPHARM: 200
+2026-11-28 12:47:58,122 | INFO | News RSS query for TORNTPHARM: https://news.google.com/rss/search?q=%22Torrent+Pharmaceuticals+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:58,150 | INFO | News RSS status for TORNTPHARM: 200
+2026-11-28 12:47:58,179 | INFO | News RSS query for TORNTPHARM: https://news.google.com/rss/search?q=%22Torrent+Pharmaceuticals+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:58,205 | INFO | News RSS status for TORNTPHARM: 200
+2026-11-28 12:47:58,207 | INFO | News RSS query for TORNTPHARM: https://news.google.com/rss/search?q=%22Torrent+Pharmaceuticals+Ltd.%22+stock+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:58,234 | INFO | News RSS status for TORNTPHARM: 200
+2026-11-28 12:47:58,743 | INFO | News RSS query for TVSMOTOR: https://news.google.com/rss/search?q=%22TVS+Motor+Company+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:58,982 | INFO | News RSS status for TVSMOTOR: 200
+2026-11-28 12:47:59,255 | INFO | News RSS query for ULTRACEMCO: https://news.google.com/rss/search?q=%22UltraTech+Cement+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:59,448 | INFO | News RSS status for ULTRACEMCO: 200
+2026-11-28 12:47:59,720 | INFO | News RSS query for UNIONBANK: https://news.google.com/rss/search?q=%22Union+Bank+of+India%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:47:59,955 | INFO | News RSS status for UNIONBANK: 200
+2026-11-28 12:48:00,051 | WARNING | Skipping VAML — only 48 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:48:00,562 | WARNING | Skipping VEDPOWER — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:48:00,562 | WARNING | Skipping VISL — only 4 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:48:00,562 | WARNING | Skipping VOGL — only 7 bars available (need 220). Extend history_backfill_days in config.json to include this symbol.
+2026-11-28 12:48:01,075 | INFO | News RSS query for ZYDUSLIFE: https://news.google.com/rss/search?q=%22Zydus+Lifesciences+Ltd.%22+NSE+when:10d&hl=en-IN&gl=IN&ceid=IN:en
+2026-11-28 12:48:01,340 | INFO | News RSS status for ZYDUSLIFE: 200
+2026-11-28 12:48:01,347 | INFO | Index membership from cache: NIFTY 50 (50 symbols)
+2026-11-28 12:48:01,347 | INFO | Index membership from cache: Nifty Next 50 (50 symbols)
+2026-11-28 12:48:01,347 | INFO | Index membership ready: 100 symbols mapped
+2026-11-28 12:48:01,347 | INFO | Market Health: fetching index OHLCV...
+2026-11-28 12:48:01,348 | INFO | Index OHLCV cache fresh for NIFTY 50 (1512 rows)
+2026-11-28 12:48:01,349 | INFO | Index OHLCV cache fresh for NIFTY NEXT 50 (1506 rows)
+2026-11-28 12:48:01,349 | INFO | Market Health: fetching VIX...
+2026-11-28 12:48:01,350 | INFO | VIX cache fresh (210 rows)
+2026-11-28 12:48:01,350 | INFO | Market Health: updating breadth EMA cache...
+2026-11-28 12:48:01,825 | INFO | Market Health [NIFTY 50]: Score=52.2 | Weak Bull &#x1F7E1;
+2026-11-28 12:48:01,835 | INFO | Market Health [Nifty Next 50]: Score=-3.0 | Sideways &#x1F7E0;
+2026-11-28 12:48:01,845 | INFO | Signal log: skipping new signal insertion — 2026-11-28 is a weekend.
+2026-11-28 12:48:02,247 | INFO | Signal tracker: updated 125 Active signal rows.
+2026-11-28 12:48:02,258 | INFO | HTML report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261128.html
+2026-11-28 12:48:02,263 | INFO | Market Health Excel sheet written.
+/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py:6434: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  df_21_50.rename(columns={"Conviction Explanation Text": "Conviction Explanation"}, inplace=True)
+/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py:6251: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  excel_df.rename(columns={"Conviction Explanation Text": "Conviction Explanation"}, inplace=True)
+/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py:6251: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  excel_df.rename(columns={"Conviction Explanation Text": "Conviction Explanation"}, inplace=True)
+/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py:6251: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  excel_df.rename(columns={"Conviction Explanation Text": "Conviction Explanation"}, inplace=True)
+/home/runner/work/nifty100-reporter/nifty100-reporter/nifty100_Report_Final_19042026.py:6251: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  excel_df.rename(columns={"Conviction Explanation Text": "Conviction Explanation"}, inplace=True)
+2026-11-28 12:48:03,387 | INFO | Excel report written: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261128.xlsx
+2026-11-28 12:48:03,387 | INFO | GitHub Actions detected — skipping Gmail API send (workflow handles email).
+2026-11-28 12:48:03,387 | INFO | Run completed successfully.
+2026-11-28 12:48:03,387 | INFO | Artifacts: /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261128.html | /home/runner/work/nifty100-reporter/nifty100-reporter/reports/nifty100_daily_report_20261128.xlsx | log: /home/runner/work/nifty100-reporter/nifty100-reporter/logs/run_20261128_181556.log
+Created automation marker: logs/automation_markers/2026-11-28.success
